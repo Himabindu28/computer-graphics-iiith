@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scaling</title>
+
+<link rel="stylesheet" href="mycss.css">
+<script src="slider-canvas.js"></script>
+
+<script src="myjs.js"></script>
+
+<script type="text/javascript"> 
+function sliderChange(val){
+    document.getElementById('sliderStatus').innerHTML=val; 
+}
+</script>
+
+
+
+<script>
+var canvas;
+var graphics;
+var shape = 0;
+var transforms = [];
+var transformParagraphs = [];
+var transformContainer;
+var selectedTransform = -1;
+var animating = false;
+var animationStep;
+var showResultOnly = false;
+
+var colors = ["black"];
+
+function draw() {
+    var i,j;
+    graphics.clearRect(0,0,400,400);
+    graphics.strokeStyle = "black";
+
+    graphics.save();
+    graphics.translate(200.5,200.5);
+    graphics.scale(40,-40);
+    graphics.beginPath();
+    graphics.moveTo(-5,0);
+    graphics.lineTo(5,0);
+    graphics.moveTo(0,5);
+    graphics.lineTo(0,-5);
+    graphics.restore();
+    graphics.lineWidth = 2;
+    graphics.stroke();
+
+    graphics.save();
+    graphics.translate(200.5,200.5);
+    graphics.scale(40,-40);
+    graphics.beginPath();
+    for (i = -4; i <= 4; i++) {
+        graphics.moveTo(-5,i);
+        graphics.lineTo(5,i);
+        graphics.moveTo(i,-5);
+        graphics.lineTo(i,5);
+    }
+    graphics.restore();
+    graphics.lineWidth = 1;
+    graphics.stroke();
+
+    graphics.fillStyle = "#8080FF";
+    for (i = -5; i <= 5; i++) {
+        if (i != 0) {
+            graphics.fillText(String(i), 40*(i+5)+2, 198);
+            graphics.fillText(String(i), 202, 400 - 40*(i+5)-2);
+        }
+    }
+    
+    graphics.save();
+    
+    graphics.translate(200.5,200.5);
+    graphics.scale(40,-40);
+    if (!showResultOnly) {
+        graphics.save();
+        drawShape(0);
+        graphics.restore();
+    }
+    
+    if (showResultOnly) {
+        for (j = transforms.length-1; j >= 0; j--) {
+           applyTransform(transforms[j]);
+        }
+        drawShape(transforms.length);
+    }
+    else {
+        var top = animating? animationStep : transforms.length;
+        for (i = 0; i < top; i++) {
+            graphics.save();
+            for (j = i; j >= 0; j--) {
+               applyTransform(transforms[j]);
+            }
+            drawShape(i+1);
+            graphics.restore();
+        }
+    }
+    
+    graphics.restore();
+    
+}
+
+function drawShape(versionNumber) {
+    if (shape == 5) { 
+        graphics.scale(.05,-.05);
+        if ( !animating || (versionNumber == animationStep) ) {
+            graphics.fillStyle = colors[versionNumber];
+        }
+        else {
+            graphics.fillStyle = "#CCCCCC";
+        }
+        graphics.font = "12pt bold serif";
+        graphics.fillText("Hello!", 1, 1);
+        return;
+    }
+    graphics.beginPath();
+    switch (shape) {
+    case 0:
+        graphics.moveTo(-2,-2);
+        graphics.lineTo(2,-2);
+        graphics.lineTo(0,2);
+       graphics.closePath();
+        break;
+ 
+    case 1:
+         graphics.moveTo(-2,-2);
+        graphics.lineTo(2,-2);
+        graphics.lineTo(0,2);
+       graphics.closePath();
+        break;
+        
+    case 2:
+        graphics.rect(-1,-1,2,2);
+        break;
+    case 3:
+       graphics.rect(-2,-1,4,2);
+        break;
+    }
+    graphics.lineWidth = 1/20;
+    graphics.strokeStyle = "black";
+    graphics.stroke();
+}
+
+function applyTransform(transform) {
+        graphics.scale(transform.a,transform.b);
+    
+}
+
+var errorTimeout = null;
+function setErrorMessage(message) {
+    if (errorTimeout) {
+        clearTimeout(errorTimeout);
+        errorTimeout = null;
+    }
+    var s = message || "Modeling Transforms in 2D";
+    document.getElementById("headline").innerHTML = s;
+    document.getElementById("headline").style.color = message? "red" : "black";
+    if (message) {
+        errorTimeout = setTimeout(function() { setErrorMessage() }, 5000);        
+    }
+}
+
+function clearTransforms() {
+    setErrorMessage();
+    transforms = [];
+    transformParagraphs = [];
+    selectedTransform = -1;
+    document.getElementById("transforms").innerHTML = "";
+    draw();
+
+}
+
+
+
+function addTransform(type /* plus data */) {
+    setErrorMessage();
+    if (transforms.length == 8) {
+        return;
+    }
+    var tr = { type: type };
+    tr.a = arguments[1];
+    if (type == "translate" || type == "scale") {
+        tr.b = arguments[2];
+    }
+    transforms.push(tr);
+    var p = document.createElement("p");
+    transformParagraphs.push(p);
+    switch (type) {
+    case "scale":
+        p.innerHTML = "scale by " + tr.a + "," + tr.b;
+        break;
+    
+    }
+    if (selectedTransform >= 0) {
+        transformParagraphs[selectedTransform].className = "notselected";
+    }
+    selectedTransform = transforms.length - 1;
+    p.numberInList = transforms.length - 1;
+    p.className = "selected";
+    p.style.cursor = "pointer";
+    p.style.color = colors[transforms.length];
+    transformContainer.appendChild(p);
+    p.onclick = function() {
+        if (selectedTransform >= 0) {
+            transformParagraphs[selectedTransform].className = "notselected";
+        }
+        p.className = "selected";
+        selectedTransform = p.numberInList;
+        draw();
+    }
+    
+
+}
+
+
+
+function addScale() {
+    if (transforms.length == 8) {
+        return;
+    }
+    var sx=(document.getElementById('sliderStatus').innerHTML);
+    var sy=(document.getElementById('sliderStatus').innerHTML);
+    if (isNaN(sx) || isNaN(sy)) {
+        setErrorMessage("Scale inputs must be numbers!");
+        return;
+    }
+    if (sx == 0 || sy == 0) {
+        setErrorMessage("Enter a non-zero scale factors!");
+        return;
+    }
+    addTransform("scale", sx, sy);
+    draw();
+}
+
+
+
+
+
+
+function changeShape() {
+    setErrorMessage();
+    var newshape = Number(document.getElementById("shapeSelect").value);
+    if (newshape != shape) {
+        shape = newshape;
+        draw();
+    }
+}
+
+function doResultOnly() {
+    showResultOnly = document.getElementById("resultOnlyCB").checked;
+    draw();
+}
+
+function reset() {
+    sliders.setValue(0,0);
+   
+    draw();
+}
+
+
+
+function init() {
+    try {
+        canvas = document.getElementById("maincanvas");
+        graphics = canvas.getContext('2d');
+        
+    }
+    catch (e) {
+        document.getElementById("headline").innerHTML = "ERROR: Canvas not supported";
+        return;
+    }
+    graphics = canvas.getContext('2d');
+    graphics.font = "10pt monospace";
+    transformContainer = document.getElementById("transforms");
+    document.getElementById("shapeSelect").value = "0";       
+    
+    document.getElementById("resultOnlyCB").checked = false;
+
+
+
+    addTransform("scale", 1, 1);
+    draw();
+    
+}
+
+
+
+
+
+
+</script>
+</head>
+<body onload="init()">
+
+<div id="content">
+
+<h3 id="headline">Modeling Transforms in 2D</h3>
+
+<div id="canvas-holder">
+<canvas id="maincanvas" width="400" height="400"></canvas>
+</div>
+
+<div id="tools">
+
+<div id="transforms"width="10" height="40">
+
+</div>
+<p>
+   </p>
+<p><button onclick="clearTransforms()">Clear</button>
+   </p>
+<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
+    <option value="0">Triangle</option>
+   <option value="2">Square</option>
+   <option value="3">Rectangle</option>
+
+</select></p>
+
+<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
+</div>
+<table border=0 cellpadding=5>
+<tr valign=top>
+  <td><canvas id="maincanvas" width="30" height="300"></canvas></td>
+  
+             
+             
+</tr>
+</table>
+<br/>
+<br/>
+<input type="range" min="0" max="1.5" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> <br /> <br />
+Scaling=<span id="sliderStatus">1</span>
+
+
+</div>
+<br/>
+<br/>
+<h3> Click on "SHOW RESULTS ONLY" to see the scaled figure only. Click on CLEAR after scaling atmost 8 times</h3>
+
+</body>
+</html>
