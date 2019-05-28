@@ -1,14 +1,4 @@
 
-window.requestAnimationFrame = 
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    function (callback) {
-        setTimeout(function() { callback(Date.now()); },  1000/60);
-    };
-    
 
 function showDemoHelp() {
     var helpBG = document.getElementById("helpBG");
@@ -26,67 +16,47 @@ function showDemoHelp() {
     }
 }
 
-function setUpMouseHander(element, mouseDownFunc, mouseDragFunc, mouseUpFunc) {
-       /*
-           element -- either the element itself or a string with the id of the element
-           mouseDownFunc(x,y,evt) -- should return a boolean to indicate whether to start a drag operation
-           mouseDragFunc(x,y,evt,prevX,prevY,startX,startY)
-           mouseUpFunc(x,y,evt,prevX,prevY,startX,startY)
-       */
-    if (!element || ! mouseDownFunc || !(typeof mouseDownFunc == "function")) {
-        throw "Illegal arguments in setUpMouseHander";
+
+var canvas;
+var graphics;
+var shape = 0;
+var transforms = [];
+var transformParagraphs = [];
+var transformContainer;
+var selectedTransform = -1;
+var animating = false;
+var animationStep;
+var showResultOnly = false;
+
+var colors = ["black"];
+
+
+
+
+function init() {
+    try {
+        canvas = document.getElementById("maincanvas");
+        graphics = canvas.getContext('2d');
+        
     }
-    if (typeof element == "string") {
-        element = document.getElementById(element);
+    catch (e) {
+        document.getElementById("headline").innerHTML = "ERROR: Canvas not supported";
+        return;
     }
-    if (!element || !element.addEventListener) {
-        throw "first argument in setUpMouseHander is not a valid element";
-    }
-    var dragging = false;
-    var startX, startY;
-    var prevX, prevY;
-    function doMouseDown(evt) {
-        if (dragging) {
-            return;
-        }
-        var r = element.getBoundingClientRect();
-        var x = evt.clientX - r.left;
-        var y = evt.clientY - r.top;
-        prevX = startX = x;
-        prevY = startY = y;
-        dragging = mouseDownFunc(x,y,evt);
-        if (dragging) {
-            document.addEventListener("mousemove",doMouseMove);
-            document.addEventListener("mouseup",doMouseUp);
-        }
-    }
-    function doMouseMove(evt) {
-        if (dragging) {
-            if (mouseDragFunc) {
-                var r = element.getBoundingClientRect();
-                var x = evt.clientX - r.left;
-                var y = evt.clientY - r.top;
-                mouseDragFunc(x,y,evt,prevX,prevY,startX,startY);
-            }
-            prevX = x;
-            prevY = y;
-        }
-    }
-    function doMouseUp(evt) {
-        if (dragging) {
-            document.removeEventListener("mousemove",doMouseMove);
-            document.removeEventListener("mouseup",doMouseUp);
-            if (mouseUpFunc) {
-                var r = element.getBoundingClientRect();
-                var x = evt.clientX - r.left;
-                var y = evt.clientY - r.top;
-                mouseUpFunc(x,y,evt,prevX,prevY,startX,startY);
-            }
-            dragging = false;
-        }
-    }
-    element.addEventListener("mousedown",doMouseDown);
+    graphics = canvas.getContext('2d');
+    graphics.font = "10pt monospace";
+    transformContainer = document.getElementById("transforms");
+    document.getElementById("shapeSelect").value = "0";       
+    
+    document.getElementById("resultOnlyCB").checked = false;
+
+
+
+    addTransform("scale", 1, 1);
+    draw();
+    
 }
+
 
 
 function setUpTouchHander(element, touchStartFunc, touchMoveFunc, touchEndFunc, touchCancelFunc) {
@@ -147,21 +117,4 @@ function setUpTouchHander(element, touchStartFunc, touchMoveFunc, touchEndFunc, 
             prevY = y;
         }
     }
-    function doTouchCancel() {
-        if (touchCancelFunc) {
-            touchCancelFunc();
-        }
-    }
-    function doTouchEnd(evt) {
-        if (dragging) {
-            dragging = false;
-            element.removeEventListener("touchmove",doTouchMove);
-            element.removeEventListener("touchend",doTouchEnd);
-            element.removeEventListener("touchcancel",doTouchCancel);
-            if (touchEndFunc) {
-                touchEndFunc(evt,prevX,prevY,startX,startY);
-            }
-        }
-    }
-    element.addEventListener("touchstart",doTouchStart);
-}
+ 

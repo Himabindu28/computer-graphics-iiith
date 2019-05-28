@@ -1,4 +1,3 @@
-
 function SliderInfo(info) {
     this.label = null;
     this.showValue = true;

@@ -1,11 +1,33 @@
+ #sliders {
+        background: none;
+    }
+$trans: transparent;
+$block: #00004f;
+$line: #19465b;
+$gridSize: 60px;
+$subdivisions: 4;
+$lineAlpha: .7;
+$sublineAlpha: .5;
+
 body {
-    background-color: lightgray;
-    -webkit-user-select: none; 
-    -moz-user-select: none;    
-    -ms-user-select: none;     
-    -o-user-select: none;    
-    user-select: none;
+  background-color: $block;
+  background-image:
+    linear-gradient(rgba($line,$sublineAlpha) 1px, $trans 1px), /*sub horiz*/
+    linear-gradient($line 1px, $trans 1px), /*main horiz*/
+    linear-gradient(90deg, rgba($line,$sublineAlpha) 1px, $trans 1px), /*sub vert*/
+    linear-gradient(90deg, rgba($line,$lineAlpha) 1px, $trans 1px), /*main vert*/
+    linear-gradient($trans 3px, $block 3px, $block $gridSize - 2, $trans $gridSize - 2), /*nub horiz*/
+    linear-gradient(90deg, rgba($line,$lineAlpha) 3px, $trans 3px, $trans $gridSize - 2, rgba($line,$lineAlpha) $gridSize - 2) /*nub vert*/
+    ;
+  background-size:
+    $gridSize / $subdivisions $gridSize / $subdivisions,
+    $gridSize $gridSize,
+    $gridSize / $subdivisions $gridSize / $subdivisions,
+    $gridSize $gridSize,
+    $gridSize $gridSize,
+    $gridSize $gridSize;
 }
+
 
 #content > h3 {
     margin-left: 70px;
@@ -29,7 +51,7 @@ canvas {
     background-color:white;
     border: 1px solid black;
     margin: 0pt;
-    padding: 8px;
+    padding: 8px
 }
 
 #tools h3 {
@@ -37,6 +59,58 @@ canvas {
     margin-bottom: 8pt;
 }
 
+#help-content {
+    display: none;
+    position: fixed;
+    left: 1cm;
+    right: 1cm;
+    top: 38px;
+    bottom: 1cm;
+    z-index: 20;
+    max-width: 800px;
+    border: 3px solid #740b0b;
+    color: #740b0b;
+    background-color: #F5F5DC;
+    padding: 8px 15px;
+    overflow: auto;
+    -webkit-user-select: text;
+    -moz-user-select: text; 
+    -ms-user-select: text; 
+    -o-user-select: text;
+    user-select: text;
+}
+
+#help-content p {
+    text-indent: 25px;
+}
+
+#help-icon {
+    position: absolute;
+    top:3px;
+    left:3px;
+    z-index:5
+}
+
+#hide-help-icon {
+    display: none;
+    position: absolute;
+    top:3px;
+    left:3px;
+    z-index:50;
+    display: none
+}
+
+#helpBG {
+    display: none;
+    position: fixed;
+    top: 0pt;
+    left: 0pt;
+    bottom: 0pt;
+    right: 0pt;
+    z-index: 10;
+    background-color: white;
+    opacity: 0.75;
+}
 
 #transforms {
    width: 200px;
@@ -58,6 +132,17 @@ canvas {
 }
 #transforms p.selected {
     background-color: #DDDDFF;
+}
+
+#box {
+   width: 250px;
+   height: 200px;
+   overflow: auto;
+   margin: 0;
+   padding: 4px;
+   background-color: white;
+   border: thin solid #740b0b;
+  
 }
 .input {
     margin-top:5px;

@@ -10,14 +10,7 @@
 <script src="myjs.js"></script>
 
 <script type="text/javascript"> 
-function sliderChange(val){
-    document.getElementById('sliderStatus').innerHTML=val; 
-}
-</script>
 
-
-
-<script>
 var canvas;
 var graphics;
 var shape = 0;
@@ -30,6 +23,11 @@ var animationStep;
 var showResultOnly = false;
 
 var colors = ["black"];
+
+function sliderChange(val){
+    document.getElementById('sliderStatus').innerHTML=val; 
+}
+
 
 function draw() {
     var i,j;
@@ -174,7 +172,7 @@ function clearTransforms() {
 
 
 
-function addTransform(type /* plus data */) {
+function addTransform(type ) {
     setErrorMessage();
     if (transforms.length == 8) {
         return;
@@ -237,8 +235,6 @@ function addScale() {
 
 
 
-
-
 function changeShape() {
     setErrorMessage();
     var newshape = Number(document.getElementById("shapeSelect").value);
@@ -250,12 +246,6 @@ function changeShape() {
 
 function doResultOnly() {
     showResultOnly = document.getElementById("resultOnlyCB").checked;
-    draw();
-}
-
-function reset() {
-    sliders.setValue(0,0);
-   
     draw();
 }
 
@@ -285,11 +275,6 @@ function init() {
     
 }
 
-
-
-
-
-
 </script>
 </head>
 <body onload="init()">
@@ -302,15 +287,59 @@ function init() {
 <canvas id="maincanvas" width="400" height="400"></canvas>
 </div>
 
+
+<div id="tools">
+<div > 
+    <button class="tablinks" onclick="openTab(event,'World')" autofocus >World</button>
+    <button class="tablinks" onclick="openTab(event,'Display')">Display</button> 
+</div> 
+
+    <!-- Tab content -->
+
+
+  
+<div id="Display" class="tabcontent">
+  
+</div>
+
+<div id="World" class="tabcontent">
+
+    
+        <div style="width:300px; height:200px; " >
+             <iframe src = "1.html" style="width:280px; height:190px">
+                Sorry your browser does not support inline frames.
+             </iframe>
+
+        </div>
+
+<!--
+<div id="transforms"width="150" height="200">
+    
+</div>
+-->
+</div>
+
+
+
 <div id="tools">
 
-<div id="transforms"width="10" height="40">
-
+<div id="box" style="width:30; height:20">
+    <div>
+        <li>World
+            <option>Instance 1</option>
+        </li>
+    </div>
 </div>
-<p>
-   </p>
+<br/>
+<br/>
+<p><button>New</button>
+<button>Edit</button></p>
+
 <p><button onclick="clearTransforms()">Clear</button>
    </p>
+<div id="transforms" width="10" height="40">
+</div>
+
 <p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
     <option value="0">Triangle</option>
    <option value="2">Square</option>
@@ -322,22 +351,16 @@ function init() {
 </div>
 <table border=0 cellpadding=5>
 <tr valign=top>
-  <td><canvas id="maincanvas" width="30" height="300"></canvas></td>
-  
-             
-             
+  <td><canvas id="maincanvas" width="30" height="30"></canvas></td>            
 </tr>
 </table>
 <br/>
 <br/>
-<input type="range" min="0" max="1.5" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> <br /> <br />
-Scaling=<span id="sliderStatus">1</span>
-
-
+<input type="range" min="1" max="2" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
+<br/>Scaling=<span id="sliderStatus">1</span>
 </div>
 <br/>
-<br/>
-<h3> Click on "SHOW RESULTS ONLY" to see the scaled figure only. Click on CLEAR after scaling atmost 8 times</h3>
-
+<!--<h3> Click on "SHOW RESULTS ONLY" to see the scaled figure only. Click on CLEAR after scaling atmost 8 times</h3>
+<p>      </p>-->
 </body>
 </html>
