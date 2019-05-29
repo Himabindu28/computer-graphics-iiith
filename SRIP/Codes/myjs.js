@@ -17,48 +17,6 @@ function showDemoHelp() {
 }
 
 
-var canvas;
-var graphics;
-var shape = 0;
-var transforms = [];
-var transformParagraphs = [];
-var transformContainer;
-var selectedTransform = -1;
-var animating = false;
-var animationStep;
-var showResultOnly = false;
-
-var colors = ["black"];
-
-
-
-
-function init() {
-    try {
-        canvas = document.getElementById("maincanvas");
-        graphics = canvas.getContext('2d');
-        
-    }
-    catch (e) {
-        document.getElementById("headline").innerHTML = "ERROR: Canvas not supported";
-        return;
-    }
-    graphics = canvas.getContext('2d');
-    graphics.font = "10pt monospace";
-    transformContainer = document.getElementById("transforms");
-    document.getElementById("shapeSelect").value = "0";       
-    
-    document.getElementById("resultOnlyCB").checked = false;
-
-
-
-    addTransform("scale", 1, 1);
-    draw();
-    
-}
-
-
-
 function setUpTouchHander(element, touchStartFunc, touchMoveFunc, touchEndFunc, touchCancelFunc) {
        /*
            element -- either the element itself or a string with the id of the element
