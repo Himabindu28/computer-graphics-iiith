@@ -1,370 +1,93 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Scaling Transformation</title>
 
-<meta charset="UTF-8">
+	</head>
 
-<title>Scaling</title>
-
-<link rel="stylesheet" href="mycss.css">
-
-<script type="text/javascript"> 
-
-var canvas;
-var graphics;
-var shape = 0;
-var transforms = [];
-var transformParagraphs = [];
-var transformContainer;
-var selectedTransform = -1;
-var animating = false;
-var animationStep;
-var showResultOnly = false;
-
-var colors = ["black"];
-
-function sliderChange(val){
-    document.getElementById('sliderStatus').innerHTML=val; 
-}
+	<body>
+		<script src="../Libraries/three.js"></script>
+		<script src="../Libraries/three.min.js"></script>
+		<script src="../Libraries/OrbitControls.js"></script>
+		<script type="text/javascript" src="myjs.js"></script>
 
 
-function draw() {
-    var i,j;
-    graphics.clearRect(0,0,400,400);
-    graphics.strokeStyle = "black";
-
-    graphics.save();
-    graphics.translate(200.5,200.5);
-    graphics.scale(40,-40);
-    graphics.beginPath();
-    graphics.moveTo(-5,0);
-    graphics.lineTo(5,0);
-    graphics.moveTo(0,5);
-    graphics.lineTo(0,-5);
-    graphics.restore();
-    graphics.lineWidth = 2;
-    graphics.stroke();
-
-    graphics.save();
-    graphics.translate(200.5,200.5);
-    graphics.scale(40,-40);
-    graphics.beginPath();
-    for (i = -4; i <= 4; i++) {
-        graphics.moveTo(-5,i);
-        graphics.lineTo(5,i);
-        graphics.moveTo(i,-5);
-        graphics.lineTo(i,5);
-    }
-    graphics.restore();
-    graphics.lineWidth = 1;
-    graphics.stroke();
-
-    graphics.fillStyle = "#8080FF";
-    for (i = -5; i <= 5; i++) {
-        if (i != 0) {
-            graphics.fillText(String(i), 40*(i+5)+2, 198);
-            graphics.fillText(String(i), 202, 400 - 40*(i+5)-2);
-        }
-    }
-    
-    graphics.save();
-    
-    graphics.translate(200.5,200.5);
-    graphics.scale(40,-40);
-    if (!showResultOnly) {
-        graphics.save();
-        drawShape(0);
-        graphics.restore();
-    }
-    
-    if (showResultOnly) {
-        for (j = transforms.length-1; j >= 0; j--) {
-           applyTransform(transforms[j]);
-        }
-        drawShape(transforms.length);
-    }
-    else {
-        var top = animating? animationStep : transforms.length;
-        for (i = 0; i < top; i++) {
-            graphics.save();
-            for (j = i; j >= 0; j--) {
-               applyTransform(transforms[j]);
-            }
-            drawShape(i+1);
-            graphics.restore();
-        }
-    }
-    
-    graphics.restore();
-    
-}
-
-function drawShape(versionNumber) {
-    if (shape == 5) { 
-        graphics.scale(.05,-.05);
-        if ( !animating || (versionNumber == animationStep) ) {
-            graphics.fillStyle = colors[versionNumber];
-        }
-        else {
-            graphics.fillStyle = "#CCCCCC";
-        }
-        graphics.font = "12pt bold serif";
-        graphics.fillText("Hello!", 1, 1);
-        return;
-    }
-    graphics.beginPath();
-    switch (shape) {
-    case 0:
-        graphics.moveTo(-2,-2);
-        graphics.lineTo(2,-2);
-        graphics.lineTo(0,2);
-       graphics.closePath();
-        break;
- 
-    case 1:
-         graphics.moveTo(-2,-2);
-        graphics.lineTo(2,-2);
-        graphics.lineTo(0,2);
-       graphics.closePath();
-        break;
-        
-    case 2:
-        graphics.rect(-1,-1,2,2);
-        break;
-    case 3:
-       graphics.rect(-2,-1,4,2);
-        break;
-    }
-    graphics.lineWidth = 1/20;
-    graphics.strokeStyle = "black";
-    graphics.stroke();
-}
-
-function applyTransform(transform) {
-        graphics.scale(transform.a,transform.b);
-    
-}
-
-var errorTimeout = null;
-function setErrorMessage(message) {
-    if (errorTimeout) {
-        clearTimeout(errorTimeout);
-        errorTimeout = null;
-    }
-    var s = message || "Modeling Transforms in 2D";
-    document.getElementById("headline").innerHTML = s;
-    document.getElementById("headline").style.color = message? "red" : "black";
-    if (message) {
-        errorTimeout = setTimeout(function() { setErrorMessage() }, 5000);        
-    }
-}
-
-function clearTransforms() {
-    setErrorMessage();
-    transforms = [];
-    transformParagraphs = [];
-    selectedTransform = -1;
-    document.getElementById("transforms").innerHTML = "";
-    draw();
-
-}
-
-
-
-function addTransform(type ) {
-    setErrorMessage();
-    if (transforms.length == 8) {
-        return;
-    }
-    var tr = { type: type };
-    tr.a = arguments[1];
-    if (type == "translate" || type == "scale") {
-        tr.b = arguments[2];
-    }
-    transforms.push(tr);
-    var p = document.createElement("p");
-    transformParagraphs.push(p);
-    switch (type) {
-    case "scale":
-        p.innerHTML = "scale by " + tr.a + "," + tr.b;
-        break;
-    
-    }
-    if (selectedTransform >= 0) {
-        transformParagraphs[selectedTransform].className = "notselected";
-    }
-    selectedTransform = transforms.length - 1;
-    p.numberInList = transforms.length - 1;
-    p.className = "selected";
-    p.style.cursor = "pointer";
-    p.style.color = colors[transforms.length];
-    transformContainer.appendChild(p);
-    p.onclick = function() {
-        if (selectedTransform >= 0) {
-            transformParagraphs[selectedTransform].className = "notselected";
-        }
-        p.className = "selected";
-        selectedTransform = p.numberInList;
-        draw();
-    }
-    
-
-}
-
-
-
-function addScale() {
-    if (transforms.length == 8) {
-        return;
-    }
-    var sx=(document.getElementById('sliderStatus').innerHTML);
-    var sy=(document.getElementById('sliderStatus').innerHTML);
-    if (isNaN(sx) || isNaN(sy)) {
-        setErrorMessage("Scale inputs must be numbers!");
-        return;
-    }
-    if (sx == 0 || sy == 0) {
-        setErrorMessage("Enter a non-zero scale factors!");
-        return;
-    }
-    addTransform("scale", sx, sy);
-    draw();
-}
-
-
-
-
-function changeShape() {
-    setErrorMessage();
-    var newshape = Number(document.getElementById("shapeSelect").value);
-    if (newshape != shape) {
-        shape = newshape;
-        draw();
-    }
-}
-
-function doResultOnly() {
-    showResultOnly = document.getElementById("resultOnlyCB").checked;
-    draw();
-}
-
-
-
-function init() {
-    try {
-        canvas = document.getElementById("maincanvas");
-        graphics = canvas.getContext('2d');
-        
-    }
-    catch (e) {
-        document.getElementById("headline").innerHTML = "ERROR: Canvas not supported";
-        return;
-    }
-    graphics = canvas.getContext('2d');
-    graphics.font = "10pt monospace";
-    transformContainer = document.getElementById("transforms");
-    document.getElementById("shapeSelect").value = "0";       
-    
-    document.getElementById("resultOnlyCB").checked = false;
-
-
-
-    addTransform("scale", 1, 1);
-    draw();
-    
-}
-
-</script>
-
-<script src="slider-canvas.js"></script>
-
-<script src="myjs.js"></script>
-
-</head>
-<body onload="init()">
-
-<div id="content">
-
-<h3 id="headline">Modeling Transforms in 2D</h3>
-
-<div id="canvas-holder">
-<canvas id="maincanvas" width="400" height="400"></canvas>
+		<div class="mainBox">
+			
+			<div class="label">
+				<table>
+				<tr>
+					<th>Name</th>
+					<th>Draw feature</th>
+					<th>Active feature</th>
+					<th>X-units</th>
+					<th>Y-units</th>
+					<th>Z-untis</th>
+					<th>Submit</th>
+				</tr>
+				<!--tr>
+					<td>Instance 1</td>
+					<td><input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()"/>Draw</td>
+					<td><input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active</td>>
+					<td><input type="Number" id="TriX" class="tbox" value="0" /></td>
+					<td><input type="Number" id="TriY" class="tbox" value="0" /></td>
+					<td><input type="Number" id="TriZ" class="tbox" value="0" /></td>
+				</tr-->
+				<tr>
+					<td>Cube</td>
+					<td><input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw</td>
+					<td><input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active</td>
+					<td><input type="Number" id="CubeX" class="tbox" value="0" /></td>
+					<td><input type="Number" id="CubeY" class="tbox" value="0" /></td>
+					<td><input type="Number" id="CubeZ" class="tbox" value="0" /></td>
+					<td><button class=" " onclick="CubeTrans()">Submit</button></td>
+				</tr>
+				<tr>
+					<td>Icosahedron</td>
+					<td><input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw</td>
+					<td><input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active</td>
+					<td><input type="Number" id="IcoX" class="tbox" value="0" /></td>
+					<td><input type="Number" id="IcoY" class="tbox" value="0" /></td>
+					<td><input type="Number" id="IcoZ" class="tbox" value="0" /></td>
+					<td><button class=" " onclick="IcosaTrans()">Submit</button></td>
+				</tr>
+				<tr>
+					<td>Dodecahedron</td>
+					<td><input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw</td>
+					<td><input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active</td>
+					<td><input type="Number" id="DodecX" class="tbox" value="0" /></td>
+					<td><input type="Number" id="DodecY" class="tbox" value="0" /></td>
+					<td><input type="Number" id="DodecZ" class="tbox" value="0" /></td>
+					<td><button class=" " onclick="DodecTrans()">Submit</button></td>
+				</tr>
+				</table>
+				<!--center><button class="wf_button" onclick="Transition()">Submit</button></center-->
+				<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>	
 </div>
+		<div class="displayFeatures">
+				<input type="checkbox" id="lockVertices" onclick="lockV()" checked="true"/>Lock vertices in the screen<br><br>
+				<script type="text/javascript"> lockV(); </script>
+				<input type="checkbox" id="xyAxis" onclick="drawXY()" checked="true"/>Draw XY grid in the screen<br><br>
+				<script type="text/javascript"> drawXY(); </script>
+				<input type="checkbox" id="yzAxis" onclick="drawYZ()"/>Draw YZ grid in the screen<br><br>
+				<input type="checkbox" id="zxAxis" onclick="drawZX()" />Draw ZX grid in the screen<br><br>
+				<!--<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>-->
+				<input type="checkbox" id="animation" onclick="startAnimation()" checked="true"/>Show Animation structure
+				<br><br>
+			</div>
+			<!--div class="innerTransformBox"> 
+					X co-ordinate:<input type="number" id="xco" class="xBox" value="0" /><br><br>
+					Y co-ordinate:<input type="number" id="yco" class="yBox" value="0" /><br><br>
+					Z co-ordinate:<input type="number" id="zco" class="zBox" value="0" /><br><br>
+					<button class="t_Button" onclick="startTransistion()">Submit</button>
 
 
-<div id="tools">
-<div > 
-    <button class="tablinks" onclick="openTab(event,'World')" autofocus >World</button>
-    <button class="tablinks" onclick="openTab(event,'Display')">Display</button> 
-</div> 
+		<p style="margin-top:10px">Shape: <select >
+    	<option value="0" id="shapeSelect1" onChange="changeShape1()">Triangle</option>
+   	<option value="2" id="shapeSelect2" onChange="changeShape2()">Square</option>
+   	<option value="3" id="shapeSelect3" onChange="changeShape3()">Rectangle</option>
+	</select></p-->
 
-    <!-- Tab content -->
-
-
-  
-<div id="Display" class="tabcontent">
-  
-</div>
-
-<div id="World" class="tabcontent">
-
-    
-        <div style="width:300px; height:200px; " >
-             <iframe src = "1.html" style="width:280px; height:190px">
-                Sorry your browser does not support inline frames.
-             </iframe>
-
-        </div>
-
-<!--
-<div id="transforms"width="150" height="200">
-    
-</div>
--->
-</div>
-
-
-
-<div id="tools">
-
-<div id="box" style="width:30; height:20">
-    <div>
-        <li>World
-            <option>Instance 1</option>
-        </li>
-    </div>
-</div>
-<br/>
-<br/>
-<p><button>New</button>
-<button>Edit</button></p>
-
-<p><button onclick="clearTransforms()">Clear</button>
-   </p>
-<div id="transforms" width="10" height="40">
-</div>
-
-<p style="margin-top:10px">Shape: <select id="shapeSelect" onChange="changeShape()">
-    <option value="0">Triangle</option>
-   <option value="2">Square</option>
-   <option value="3">Rectangle</option>
-
-</select></p>
-
-<p style="margin-top:5px"><label><input type="checkbox" id="resultOnlyCB" onchange="doResultOnly()">Show Result Only</label></p>
-</div>
-<table border=0 cellpadding=5>
-<tr valign=top>
-  <td><canvas id="maincanvas" width="30" height="30"></canvas></td>            
-</tr>
-</table>
-<br/>
-<br/>
-<input type="range" min="1" max="2" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
-<br/>Scaling=<span id="sliderStatus">1</span>
-</div>
-<br/>
-<h3> Click on "SHOW RESULTS ONLY" to see the scaled figure only. Click on CLEAR after scaling atmost 8 times</h3>
-<p>      </p>
-</body>
+	</body>	
 </html>
