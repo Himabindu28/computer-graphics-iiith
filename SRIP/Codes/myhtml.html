@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Scaling Transformation</title>
+		<link rel="stylesheet" href="mycss.css">
 
 	</head>
 
@@ -11,11 +12,14 @@
 		<script src="../Libraries/three.min.js"></script>
 		<script src="../Libraries/OrbitControls.js"></script>
 		<script type="text/javascript" src="myjs.js"></script>
-
-
-		<div class="mainBox">
-			
-			<div class="label">
+		<input type="range" class="slider" min="1" max="10" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
+				<br/>Scaling= <span id="sliderStatus">1</span>
+		<div class="BigBox">
+			<!--div class="innerBox">
+		
+			</div-->
+			<div class="displayFeatures">
+				
 				<table>
 				<tr>
 					<th>Name</th>
@@ -26,14 +30,15 @@
 					<th>Z-untis</th>
 					<th>Submit</th>
 				</tr>
-				<!--tr>
+				<tr>
 					<td>Instance 1</td>
-					<td><input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()"/>Draw</td>
-					<td><input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active</td>>
+					<td><input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw</td>
+					<td><input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active</td>
 					<td><input type="Number" id="TriX" class="tbox" value="0" /></td>
 					<td><input type="Number" id="TriY" class="tbox" value="0" /></td>
 					<td><input type="Number" id="TriZ" class="tbox" value="0" /></td>
-				</tr-->
+					<td><button class=" " onclick="TriTrans()">Submit</button></td>
+				</tr>
 				<tr>
 					<td>Cube</td>
 					<td><input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw</td>
@@ -62,10 +67,12 @@
 					<td><button class=" " onclick="DodecTrans()">Submit</button></td>
 				</tr>
 				</table>
+			
 				<!--center><button class="wf_button" onclick="Transition()">Submit</button></center-->
-				<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>	
-</div>
-		<div class="displayFeatures">
+				
+
+		
+			<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true" />Show the simulation in 3D<br><br>	
 				<input type="checkbox" id="lockVertices" onclick="lockV()" checked="true"/>Lock vertices in the screen<br><br>
 				<script type="text/javascript"> lockV(); </script>
 				<input type="checkbox" id="xyAxis" onclick="drawXY()" checked="true"/>Draw XY grid in the screen<br><br>
@@ -76,6 +83,8 @@
 				<input type="checkbox" id="animation" onclick="startAnimation()" checked="true"/>Show Animation structure
 				<br><br>
 			</div>
+		</div>
+
 			<!--div class="innerTransformBox"> 
 					X co-ordinate:<input type="number" id="xco" class="xBox" value="0" /><br><br>
 					Y co-ordinate:<input type="number" id="yco" class="yBox" value="0" /><br><br>
