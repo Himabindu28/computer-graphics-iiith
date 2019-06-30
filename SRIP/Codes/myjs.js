@@ -1,25 +1,32 @@
 var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera( 60, (0.7*window.innerWidth) / (0.7*window.innerHeight), 0.001, 100000 );
+var heightScreen = 600;
+var widthScreen = 600;
+var camera = new THREE.PerspectiveCamera( 60, widthScreen/heightScreen, 0.001, 100000 );
 
-var camera2 = new THREE.OrthographicCamera(	window.innerWidth / -900, 
-											window.innerWidth / 900, 
-											window.innerHeight / 800, 
-											window.innerHeight / -800,
-											0.01,
-											10000 );
+var camera2 = new THREE.OrthographicCamera(	widthScreen / -900, 
+											widthScreen / 900, 
+											heightScreen / 900, 
+											heightScreen / -900,
+											0.001,
+											100000 );
 
+var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true});
 
-var renderer = new THREE.WebGLRenderer();
+renderer.setSize( 600, 600);
+
+/*
+var canvas = document.getElementById('renderCanvas' );
+var renderer = new THREE.WebGLRenderer( { canvas: canvas } );
 var heightScreen = 0.7*window.innerHeight;
 var widthScreen = 0.5*window.innerWidth;
 renderer.setSize( widthScreen, heightScreen);
 document.body.appendChild( renderer.domElement );
-
+*/
 
 window.addEventListener( 'resize' , function () {
-	var width = 0.5*window.innerWidth;
-	var height = 0.7*window.innerHeight;
+	var width = widthScreen;
+	var height = heightScreen;
 	renderer.setSize( width, height);
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
@@ -31,6 +38,7 @@ controls.maxAzimuthAngle = Math.PI / 2;
 controls.enableKeys = true;
 
 function camera2D() {
+	
 	var condition = document.getElementById('2DCamera').checked;
 	if( condition == true) {
 		scene.remove(camera2);
@@ -41,12 +49,9 @@ function camera2D() {
 		controls.maxAzimuthAngle = Math.PI / 2;
 		camera.position.set(0.5,-0.25,2.2);
 		controls.enableKeys = true;
-		camera.rotation.y = Math.PI / 6;
-		camera.rotation.x = -Math.PI / 10;
-		camera.rotation.z = Math.PI / 16;
-		camera.position.x = 1.25;
-		camera.position.y = 0.5;
-		camera.position.z = 2.2;
+		camera.rotation.x = 0;
+		camera.rotation.y = 0;
+		camera.rotation.z = 0;
 		light.position.set( 0, 0.2, -0.5 );
 	} else {
 		scene.remove(camera);
@@ -203,56 +208,10 @@ function lockV() {
 }
 
 
-/*function world_lockV() {
-	exmple1.position.set(0.05,-0.2,0);
-	exmpl2.position.set(0.35,-0.35,0);
-	exmple3.position.set(0.9,-0.35,0);
-		
-		s1.position.set(0.7, -0.3, 0.2);
-		s2.position.set(1.1, -0.3, 0.2);
-		s3.position.set(1.1, -0.3, -0.2);
-		s4.position.set(0.7, -0.3, -0.2);
-		s5.position.set(0.7, -0.4, 0.2);
-		s6.position.set(1.1, -0.4, 0.2);
-		s7.position.set(1.1, -0.4, -0.2);
-		s8.position.set(0.7, -0.4, -0.2);
-		s9.position.set(0.1, -0.3, 0.05);
-		s10.position.set(0.1, -0.3, -0.05);
-		s11.position.set(0, -0.4, 0.05);
-		s12.position.set(0, -0.4, -0.05);
-		s13.position.set(0, 0, 0.05);
-		s14.position.set(0, 0, -0.05);
-		s15.position.set(0.1, 0, 0.05);
-		s16.position.set(0.1, 0, -0.05);
-		s17.position.set(0.7, -0.3, 0.05);
-		s18.position.set(0.7, -0.3, -0.05);
-		
-		scene.add(s1);
-		scene.add(s2);
-		scene.add(s3);
-		scene.add(s4);
-		scene.add(s5);
-		scene.add(s6);
-		scene.add(s7);
-		scene.add(s8);
-		scene.add(s9);
-		scene.add(s10);
-		scene.add(s11);
-		scene.add(s12);
-		scene.add(s13);
-		scene.add(s14);
-		scene.add(s15);
-		scene.add(s16);
-		scene.add(s17);
-		scene.add(s18);
-}
-*/
-// The World figures block functions 
-
 
 var dodecahedronGeometry = new THREE.DodecahedronGeometry(0.1618);
 dodecahedronGeometry.rotateX(11/7);
-var material = new THREE.MeshBasicMaterial({color: 0x099556});
+var material = new THREE.MeshLambertMaterial({ flatShading: true, wireframe: false,color: 0x099556});
 var dodecahedron = new THREE.Mesh(dodecahedronGeometry, material);
 
 //dodecahedron.position.x = 25;
@@ -262,6 +221,8 @@ light.position.set(0,0,0);
 
 		
 function DrawDodecahedron() {
+	document.getElementById('2DCamera').checked=false;
+	camera2D();
 	var condition = document.getElementById('DodecahedronDraw').checked;
 	if( condition == true) {
 		scene.add(dodecahedron);
@@ -277,6 +238,7 @@ function DrawDodecahedron() {
 
 
 function ActiveDodecahedron() {
+
 	var condition1 = document.getElementById('DodecahedronDraw').checked;
 	var condition2 = document.getElementById('DodecahedronActive').checked;
 
@@ -427,6 +389,8 @@ light.position.set(0,0,0);
 
 		
 function DrawIcosahedron() {
+	document.getElementById('2DCamera').checked=false;
+	camera2D();
 	var condition = document.getElementById('IcosahedronDraw').checked;
 	if( condition == true) {
 		scene.add(icosahedron);
@@ -551,6 +515,8 @@ cube.position.set(0,0,0);
 
 function DrawCube() {
 
+	document.getElementById('2DCamera').checked=false;
+	camera2D();
 	var condition = document.getElementById('CubeDraw').checked;
 	if( condition == true) {
 
@@ -580,6 +546,8 @@ var triangle = new THREE.Mesh( geom, material );
 
 
 function DrawTriangle(){
+	document.getElementById('2DCamera').checked=false;
+	camera2D();
 	var condition = document.getElementById('TriangleDraw').checked;
 	if( condition == true) {
 
@@ -615,7 +583,7 @@ function ActiveTriangle(){
 		scene.remove(s42);
 		scene.remove(s43);
 
-	}
+	}	
 
 }
 
@@ -738,12 +706,17 @@ function sliderChange(val){
 
 
 function addScale() {
+	var conditionAnimation = document.getElementById('animation').checked;
+	if(conditionAnimation==true){
 	var condition= document.getElementById('CubeDraw');
 	var condition1= document.getElementById('DodecahedronDraw');
 	var condition2= document.getElementById('IcosahedronDraw');
 	var condition3=document.getElementById('TriangleDraw');
     var sx=(document.getElementById('sliderStatus').innerHTML);
     var sy=(document.getElementById('sliderStatus').innerHTML);
+    XScale = Number(document.getElementById('ScaleX').value);
+	YScale = Number(document.getElementById('ScaleY').value);
+	ZScale = Number(document.getElementById('ScaleZ').value);
     if (isNaN(sx) || isNaN(sy)) {
         //setErrorMessage("Scale inputs must be numbers!");
         return;
@@ -753,51 +726,119 @@ function addScale() {
         return;
     }
     if(condition)
-			{	if(sx<=2&&sy<=3){
-				cube.scale.set(sx,sy,1);}
-				else if(sy<=3 && sx>2){
-					cube.scale.set(2,sy,1);
-				}else{
-					cube.scale.set(2,3,1);
+			{	if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+					cube.scale.set(sx,sy,sx);
+				}
+				else if(sy<=YScale && sx>XScale && sx>ZScale){
+					cube.scale.set(XScale,sy,ZScale);
+				}
+				else if(sy<=YScale && sx>XScale && sx<=ZScale){
+					cube.scale.set(XScale,sy,sx);
+				}
+				else if(sy>YScale && sx>XScale && sx<=ZScale){
+					cube.scale.set(XScale,YScale,sx);
+				}
+				else if(sy>YScale && sx<=XScale && sx>ZScale){
+					cube.scale.set(sx,YScale,ZScale);
+				}
+				else if(sy>YScale && sx>=XScale && sx<=ZScale){
+					cube.scale.set(XScale,YScale,sz);
+				}
+				else if(sy<=YScale && sx<=XScale && sx>ZScale){
+					cube.scale.set(sx,sy,ZScale);
+				}
+				else{
+					cube.scale.set(XScale,YScale,ZScale);
+					
 				}
 				document.getElementById('CubeActive').checked = false;
 				ActiveCube();
 			}
 		if(condition1)
-			{	if(sx<=2&&sy<=3){
-				icosahedron.scale.set(sx,sy,1);}
-				else if(sy<=3 && sx>2){
-					icosahedron.scale.set(2,sy,1);
+			{if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+					icosahedron.scale.set(sx,sy,sx);
+				}
+				else if(sy<=YScale && sx>XScale && sx>ZScale){
+					icosahedron.scale.set(XScale,sy,ZScale);
+				}
+				else if(sy<=YScale && sx>XScale && sx<=ZScale){
+					icosahedron.scale.set(XScale,sy,sx);
+				}
+				else if(sy>YScale && sx>XScale && sx<=ZScale){
+					icosahedron.scale.set(XScale,YScale,sx);
+				}
+				else if(sy>YScale && sx<=XScale && sx>ZScale){
+					icosahedron.scale.set(sx,YScale,ZScale);
+				}
+				else if(sy>YScale && sx>=XScale && sx<=ZScale){
+					icosahedron.scale.set(XScale,YScale,sz);
+				}
+				else if(sy<=YScale && sx<=XScale && sx>ZScale){
+					icosahedron.scale.set(sx,sy,ZScale);
 				}
 				else{
-				icosahedron.scale.set(2,3,1);
-			}
+					icosahedron.scale.set(XScale,YScale,ZScale);
+				}
 				document.getElementById('IcosahedronActive').checked = false;
 				ActiveIcosahedron();
 			}
 		if(condition2)
-			{	if(sx<=2&&sy<=3){
-				dodecahedron.scale.set(sx,sy,1);}
-				else if(sy<=3 && sx>2){
-					dodecahedron.scale.set(2,sy,1);
+			{	if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+					dodecahedron.scale.set(sx,sy,sx);
+				}
+				else if(sy<=YScale && sx>XScale && sx>ZScale){
+					dodecahedron.scale.set(XScale,sy,ZScale);
+				}
+				else if(sy<=YScale && sx>XScale && sx<=ZScale){
+					dodecahedron.scale.set(XScale,sy,sx);
+				}
+				else if(sy>YScale && sx>XScale && sx<=ZScale){
+					dodecahedron.scale.set(XScale,YScale,sx);
+				}
+				else if(sy>YScale && sx<=XScale && sx>ZScale){
+					dodecahedron.scale.set(sx,YScale,ZScale);
+				}
+				else if(sy>YScale && sx>=XScale && sx<=ZScale){
+					dodecahedron.scale.set(XScale,YScale,sz);
+				}
+				else if(sy<=YScale && sx<=XScale && sx>ZScale){
+					dodecahedron.scale.set(sx,sy,ZScale);
 				}
 				else{
-				dodecahedron.scale.set(2,3,1);
-			}
+					dodecahedron.scale.set(XScale,YScale,ZScale);
+				}
 				document.getElementById('DodecahedronActive').checked = false;
 				ActiveDodecahedron();
 			}
 		if(condition3)
-		{	if(sx<=2&&sy<=3){
-				triangle.scale.set(sx,sy,1);}
-				else if(sy<=3 && sx>2){
-					triangle.scale.set(2,sy,1);
+		{	if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+					triangle.scale.set(sx,sy,sx);
+				}
+				else if(sy<=YScale && sx>XScale && sx>ZScale){
+					triangle.scale.set(XScale,sy,ZScale);
+				}
+				else if(sy<=YScale && sx>XScale && sx<=ZScale){
+					triangle.scale.set(XScale,sy,sx);
+				}
+				else if(sy>YScale && sx>XScale && sx<=ZScale){
+					triangle.scale.set(XScale,YScale,sx);
+				}
+				else if(sy>YScale && sx<=XScale && sx>ZScale){
+					triangle.scale.set(sx,YScale,ZScale);
+				}
+				else if(sy>YScale && sx>=XScale && sx<=ZScale){
+					triangle.scale.set(XScale,YScale,sz);
+				}
+				else if(sy<=YScale && sx<=XScale && sx>ZScale){
+					triangle.scale.set(sx,sy,ZScale);
 				}
 				else{
-			triangle.scale.set(2,3,1);}
+					triangle.scale.set(XScale,YScale,ZScale);
+				}
 			document.getElementById('TriangleActive').checked = false;
 			ActiveTriangle();
 		}
+}
 }
 
 
@@ -856,6 +897,158 @@ function TriTrans(){
 	triangle.position.z = tz*0.1;
 
 }}
+
+
+
+
+
+function IXScale() {
+	var six = Number(document.getElementById('ScaleIX').value);
+
+
+var conditionAnimation = document.getElementById('animation').checked;
+	if(conditionAnimation==true){
+	var condition= document.getElementById('CubeDraw');
+	var condition1= document.getElementById('DodecahedronDraw');
+	var condition2= document.getElementById('IcosahedronDraw');
+	var condition3=document.getElementById('TriangleDraw');
+ 
+    XScale = Number(document.getElementById('ScaleX').value);
+	YScale = Number(document.getElementById('ScaleY').value);
+	ZScale = Number(document.getElementById('ScaleZ').value);
+   
+    if(condition)
+			{	if(six<=XScale){
+					cube.scale.x=six
+				}
+				document.getElementById('CubeActive').checked = false;
+				ActiveCube();
+			}
+		if(condition1)
+			{if(six<=XScale){
+					icosahedron.scale.x=six;
+				}
+				
+				
+				document.getElementById('IcosahedronActive').checked = false;
+				ActiveIcosahedron();
+			}
+		if(condition2)
+			{	if(six<=XScale){
+					dodecahedron.scale.x=six;
+				}
+				document.getElementById('DodecahedronActive').checked = false;
+				ActiveDodecahedron();
+			}
+		if(condition3)
+		{	if(six<=XScale){
+					triangle.scale.x=six;
+				}
+			document.getElementById('TriangleActive').checked = false;
+			ActiveTriangle();
+		}
+}
+}
+
+
+function IYScale() {
+	var siy = Number(document.getElementById('ScaleIY').value);
+
+	var conditionAnimation = document.getElementById('animation').checked;
+	if(conditionAnimation==true){
+
+	var condition= document.getElementById('CubeDraw');
+	var condition1= document.getElementById('DodecahedronDraw');
+	var condition2= document.getElementById('IcosahedronDraw');
+	var condition3=document.getElementById('TriangleDraw');
+ 
+    XScale = Number(document.getElementById('ScaleX').value);
+	YScale = Number(document.getElementById('ScaleY').value);
+	ZScale = Number(document.getElementById('ScaleZ').value);
+ 
+    if(condition)
+			{	if(siy<=YScale){
+					cube.scale.y=siy
+				}
+				document.getElementById('CubeActive').checked = false;
+				ActiveCube();
+			}
+		if(condition1)
+			{if(siy<=YScale){
+					icosahedron.scale.y=siy;
+				}
+				
+				
+				document.getElementById('IcosahedronActive').checked = false;
+				ActiveIcosahedron();
+			}
+		if(condition2)
+			{	if(sy<=YScale){
+					dodecahedron.scale.y=siy;
+				}
+				document.getElementById('DodecahedronActive').checked = false;
+				ActiveDodecahedron();
+			}
+		if(condition3)
+		{	if(sy<=YScale){
+					triangle.scale.y=siy;
+				}
+			document.getElementById('TriangleActive').checked = false;
+			ActiveTriangle();
+		}
+}}
+
+
+
+function IZScale() {	
+	var siz = Number(document.getElementById('ScaleIZ').value);
+
+
+	var conditionAnimation = document.getElementById('animation').checked;
+	if(conditionAnimation==true){
+	var condition= document.getElementById('CubeDraw');
+	var condition1= document.getElementById('DodecahedronDraw');
+	var condition2= document.getElementById('IcosahedronDraw');
+	var condition3=document.getElementById('TriangleDraw');
+ 
+    XScale = Number(document.getElementById('ScaleX').value);
+	YScale = Number(document.getElementById('ScaleY').value);
+	ZScale = Number(document.getElementById('ScaleZ').value);
+  
+    if(condition)
+			{	if(siz<=ZScale){
+					cube.scale.z=siz
+				}
+				document.getElementById('CubeActive').checked = false;
+				ActiveCube();
+			}
+		if(condition1)
+			{if(siz<=ZScale){
+					icosahedron.scale.z=siz;
+				}
+				
+				
+				document.getElementById('IcosahedronActive').checked = false;
+				ActiveIcosahedron();
+			}
+		if(condition2)
+			{	if(siz<=ZScale){
+					dodecahedron.scale.z=siz;
+				}
+				document.getElementById('DodecahedronActive').checked = false;
+				ActiveDodecahedron();
+			}
+		if(condition3)
+		{	if(siz<=ZScale){
+					triangle.scale.z=siz;
+				}
+			document.getElementById('TriangleActive').checked = false;
+			ActiveTriangle();
+		}
+}}
+
+
+
 
 //camera.position.set(0.5,-0.25,1.5)
 camera.position.set(0.5,-0.25,2.2);
@@ -1268,6 +1461,9 @@ function startAnimation() {
 	if(conditionAnimation == false) {
 		document.getElementById('lockVertices').checked = false;
 		lockV();
+		XScale = Number(document.getElementById('ScaleX').value);
+		YScale = Number(document.getElementById('ScaleY').value);
+		ZScale = Number(document.getElementById('ScaleZ').value);
 
 		var condition = document.getElementById('CubeDraw').checked;
 		var condition1 = document.getElementById('IcosahedronDraw').checked;
@@ -1275,26 +1471,26 @@ function startAnimation() {
 		var condition3 = document.getElementById('TriangleDraw').checked;
 		if(condition)
 			{
-				cube.scale.set(2,3,1);
+				cube.scale.set(XScale,YScale,ZScale);
 				document.getElementById('CubeActive').checked = false;
 				ActiveCube();
 
 			}
 		if(condition1)
 			{
-				icosahedron.scale.set(2,3,1);
+				icosahedron.scale.set(XScale,YScale,ZScale);
 				document.getElementById('IcosahedronActive').checked = false;
 				ActiveIcosahedron();
 			}
 		if(condition2)
 		{
-			dodecahedron.scale.set(2,3,1);
+			dodecahedron.scale.set(XScale.YScale,ZScale);
 			document.getElementById('DodecahedronActive').checked = false;
 			ActiveDodecahedron();
 		}
 		if(condition3)
 		{
-			triangle.scale.set(2,3,1);
+			triangle.scale.set(XScale,YScale,ZScale);
 			document.getElementById('TriangleActive').checked = false;
 			ActiveTriangle();
 		}
@@ -1327,7 +1523,10 @@ function startAnimation() {
 			}
 	}
 }
+
 scene.add(triangle);
+
+
 
 													//GAME LOGIC
 

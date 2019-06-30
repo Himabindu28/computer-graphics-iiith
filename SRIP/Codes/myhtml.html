@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Scaling Transformation</title>
-		<link rel="stylesheet" href="mycss.css">
+<html>
+<head>
 
-	</head>
+<meta charset="UTF-8">
 
-	<body>
+<title>Scaling</title>
+
+<link rel="stylesheet" href="mycss.css">
+
+</head>
+
+<body>
+<!--canvas id="renderCanvas" style="width: 7px;height: 7px;"></canvas-->
 		<script src="../Libraries/three.js"></script>
 		<script src="../Libraries/three.min.js"></script>
 		<script src="../Libraries/OrbitControls.js"></script>
-		<script type="text/javascript" src="myjs.js"></script>
-		<input type="range" class="slider" min="1" max="10" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
-				<br/>Scaling= <span id="sliderStatus">1</span>
-		<div class="BigBox">
-			<!--div class="innerBox">
-		
-			</div-->
-			<div class="displayFeatures">
+<div id="content">
+
+<div id="canvas-holder">
+<canvas id="mainCanvas" width="600" height="600"></canvas>
+<script type="text/javascript" src="myjs.js"></script>
+<input type="range" class="slider" min="1" max="10" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
+			
+
+<br/>Scaling= <span id="sliderStatus">1</span>
+</div>
+
+
+<div id="tools">
+
+
+    
+
+             <iframe src = "1.html" style="width:500px;height:200px;">
+                Sorry your browser does not support inline frames.
+             </iframe>
 				
 				<table>
 				<tr>
@@ -67,9 +83,6 @@
 					<td><button class=" " onclick="DodecTrans()">Submit</button></td>
 				</tr>
 				</table>
-			
-				<!--center><button class="wf_button" onclick="Transition()">Submit</button></center-->
-				
 
 		
 			<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true" />Show the simulation in 3D<br><br>	
@@ -81,22 +94,32 @@
 				<input type="checkbox" id="zxAxis" onclick="drawZX()" />Draw ZX grid in the screen<br><br>
 				<!--<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>-->
 				<input type="checkbox" id="animation" onclick="startAnimation()" checked="true"/>Show Animation structure
+				<br><br>Limit for Scaling Factors -> X:
+				<input type="Number" id="ScaleX" class="tbox" value="2" />Y:
+				<input type="Number" id="ScaleY" class="tbox" value="3" />Z:
+				<input type="Number" id="ScaleZ" class="tbox" value="1" />
+				<br><br>Scale by individual directions -><br> X:
+				<input type="Number" id="ScaleIX" class="tbox" value="1" />
+				<td><button class=" " onclick="IXScale()">Submit</button></td><br>Y:
+				<input type="Number" id="ScaleIY" class="tbox" value="1" />
+				<td><button class=" " onclick="IYScale()">Submit</button></td><br>Z:
+				<input type="Number" id="ScaleIZ" class="tbox" value="1" />
+				<td><button class=" " onclick="IZScale()">Submit</button></td>
 				<br><br>
-			</div>
-		</div>
+</div>
 
-			<!--div class="innerTransformBox"> 
-					X co-ordinate:<input type="number" id="xco" class="xBox" value="0" /><br><br>
-					Y co-ordinate:<input type="number" id="yco" class="yBox" value="0" /><br><br>
-					Z co-ordinate:<input type="number" id="zco" class="zBox" value="0" /><br><br>
-					<button class="t_Button" onclick="startTransistion()">Submit</button>
-
-
-		<p style="margin-top:10px">Shape: <select >
-    	<option value="0" id="shapeSelect1" onChange="changeShape1()">Triangle</option>
-   	<option value="2" id="shapeSelect2" onChange="changeShape2()">Square</option>
-   	<option value="3" id="shapeSelect3" onChange="changeShape3()">Rectangle</option>
-	</select></p-->
-
-	</body>	
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
