@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 
-<title>Scaling</title>
+<title>Transformatiom : Scaling</title>
 
 <link rel="stylesheet" href="mycss.css">
 
@@ -18,25 +18,34 @@
 <div id="content">
 
 <div id="canvas-holder">
-<canvas id="mainCanvas" width="600" height="600"></canvas>
+<canvas id="mainCanvas" width="700" height="600"></canvas>
 <script type="text/javascript" src="myjs.js"></script>
-<input type="range" class="slider" min="1" max="10" value="1" step="0.01" onchange="sliderChange(this.value)" onclick="addScale()"/> 
+<input type="range" class="slider" min="1" max="5" value="1" step="0.01" onchange="sliderChange(this.value)"                  onclick="addScale()"/> 
 			
 
-<br/>Scaling= <span id="sliderStatus">1</span>
+<br/>Scaling factor= <span id="sliderStatus">1</span> 
 </div>
 
 
-<div id="tools">
+<div class="tab">
+
+  <button class="tablinks" onclick="openTab(event, 'Manual')">Manual</button>
+  <button class="tablinks" onclick="openTab(event, 'World')">World</button>
+  <button class="tablinks" onclick="openTab(event, 'Display')">Display</button>
+
+</div>
+		<div id="Manual" class= "tabcontent">
+			<iframe src = "1.html" style="width:600px;height:400px;">
+		                Sorry your browser does not support inline frames.
+		             </iframe>
+
+		</div>
+		
+	<div id="World" class="tabcontent">
 
 
-    
-
-             <iframe src = "1.html" style="width:500px;height:200px;">
-                Sorry your browser does not support inline frames.
-             </iframe>
-				
-				<table>
+  
+				<table class=tabb>
 				<tr>
 					<th>Name</th>
 					<th>Draw feature</th>
@@ -45,6 +54,7 @@
 					<th>Y-units</th>
 					<th>Z-untis</th>
 					<th>Submit</th>
+					<!--th>Vertices<th-->
 				</tr>
 				<tr>
 					<td>Instance 1</td>
@@ -54,6 +64,7 @@
 					<td><input type="Number" id="TriY" class="tbox" value="0" /></td>
 					<td><input type="Number" id="TriZ" class="tbox" value="0" /></td>
 					<td><button class=" " onclick="TriTrans()">Submit</button></td>
+
 				</tr>
 				<tr>
 					<td>Cube</td>
@@ -63,6 +74,8 @@
 					<td><input type="Number" id="CubeY" class="tbox" value="0" /></td>
 					<td><input type="Number" id="CubeZ" class="tbox" value="0" /></td>
 					<td><button class=" " onclick="CubeTrans()">Submit</button></td>
+
+
 				</tr>
 				<tr>
 					<td>Icosahedron</td>
@@ -72,19 +85,707 @@
 					<td><input type="Number" id="IcoY" class="tbox" value="0" /></td>
 					<td><input type="Number" id="IcoZ" class="tbox" value="0" /></td>
 					<td><button class=" " onclick="IcosaTrans()">Submit</button></td>
+					<!--td><button class=" " onclick="IcosaInput()">Submit</button></td-->
 				</tr>
 				<tr>
 					<td>Dodecahedron</td>
 					<td><input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw</td>
+
 					<td><input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active</td>
+
 					<td><input type="Number" id="DodecX" class="tbox" value="0" /></td>
+
 					<td><input type="Number" id="DodecY" class="tbox" value="0" /></td>
+
 					<td><input type="Number" id="DodecZ" class="tbox" value="0" /></td>
+
 					<td><button class=" " onclick="DodecTrans()">Submit</button></td>
+					<!--td><button class=" " onclick="DodecInput()">Submit</button></td-->
 				</tr>
 				</table>
 
+				<h4>Click below to change the vertices and faces of the following figures("Draw" checbox should be checked to observe the changes)</h4>
+
+				<div class="wrld">
+
+				  <button class="wrldlinks" onclick="openFig(event, 'trianglee')">Instance1</button>
+
+				  <button class="wrldlinks" onclick="openFig(event, 'cubee')">cube</button>
+
+				  <button class="wrldlinks" onclick="openFig(event, 'icosahedronn')">Icosahedron</button>
+
+				  <button class="wrldlinks" onclick="openFig(event, 'dodecahedronn')">Dodecahedron</button>
+				 
+				</div>
+
+				<div id="trianglee" class="wrldcontent" >
+					<div class="ex1">
+				  <b> <h4>Scaled coordinates :</h4>
+			(<span id="coordTrix1">4</span> , <span id="coordTriy1">3</span> , <span id="coordTriz1">0</span>)<br>
+			(<span id="coordTrix2">0</span> , <span id="coordTriy2">4</span> , <span id="coordTriz2">0</span>)<br>
+			(<span id="coordTrix3">2</span> , <span id="coordTriy3">1</span> , <span id="coordTriz3">0</span>)<br>
+			
+		</b><br>
+						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <input type="Number" id="TriangleiX1" class="tbox" value="4" />
+						<input type="Number" id="TriangleiY1" class="tbox" value="3" />
+						<input type="Number" id="TriangleiZ1" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="TriangleiX2" class="tbox" value="0" />
+						<input type="Number" id="TriangleiY2" class="tbox" value="4" />
+						<input type="Number" id="TriangleiZ2" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="TriangleiX3" class="tbox" value="2" />
+						<input type="Number" id="TriangleiY3" class="tbox" value="1" />
+						<input type="Number" id="TriangleiZ3" class="tbox" value="0" />
+						<br/>
+					
+					<button class=" " onclick="TriInput()">SubmitVertices</button>
+					<br/>
+					<br/>
+					< Triangles (faces) ><br/>
+						<input type="Number" id="TriangleeX" class="tbox" value="0" />
+						<input type="Number" id="TriangleeY" class="tbox" value="1" />
+						<input type="Number" id="TriangleeZ" class="tbox" value="2" />
+						<br/>
+					
+					<button class=" " onclick="TriFaceInput()">SubmitFaces</button>
+				</p>
+				
+				
+		</div>
+				</div>
+
+				<div id="cubee" class="wrldcontent"  >
+					<div class="ex1" >
+						<b> <h4>Scaled coordinates :</h4>
+			(<span id="coordCubex1">-1</span> , <span id="coordCubey1">-1</span> , <span id="coordCubez1">1</span>)<br>
+			(<span id="coordCubex2">1</span> , <span id="coordCubey2">-1</span> , <span id="coordCubez2">1</span>)<br>
+			(<span id="coordCubex3">-1</span> , <span id="coordCubey3">1</span> , <span id="coordCubez3">1</span>)<br>
+			(<span id="coordCubex4">1</span> , <span id="coordCubey4">1</span> , <span id="coordCubez4">1</span> )<br>
+			(<span id="coordCubex5">-1</span> , <span id="coordCubey5">-1</span> , <span id="coordCubez5">-1</span>)<br>
+			(<span id="coordCubex6">1</span> , <span id="coordCubey6">-1</span> , <span id="coordCubez6">-1</span>)<br>
+			(<span id="coordCubex7">-1</span> , <span id="coordCubey7">1</span> , <span id="coordCubez7">-1</span>)<br>
+			(<span id="coordCubex8">1</span> , <span id="coordCubey8">1</span> , <span id="coordCubez8">-1</span>)<br>
+		</b><br>
+						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <input type="Number" id="CubeiX1" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY1" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ1" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX2" class="tbox" value="1" />
+						<input type="Number" id="CubeiY2" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ2" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX3" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY3" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ3" class="tbox" value="1" />
+						<br/>
+	
+						<input type="Number" id="CubeiX4" class="tbox" value="1" />
+						<input type="Number" id="CubeiY4" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ4" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="CubeiX5" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY5" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ5" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX6" class="tbox" value="1" />
+						<input type="Number" id="CubeiY6" class="tbox" value="-1" />
+						<input type="Number" id="CubeiZ6" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX7" class="tbox" value="-1" />
+						<input type="Number" id="CubeiY7" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ7" class="tbox" value="-1" />
+						<br/>
+						
+						<input type="Number" id="CubeiX8" class="tbox" value="1" />
+						<input type="Number" id="CubeiY8" class="tbox" value="1" />
+						<input type="Number" id="CubeiZ8" class="tbox" value="-1" />
+						<br/>
+						
+					
+					<button class=" " onclick="CubeInput()">SubmitVertices</button>
 		
+
+				
+					<br/><br/>
+					< faces (triangles) ><br/>
+						<input type="Number" id="CubeeX1" class="tbox" value="0" />
+						<input type="Number" id="CubeeY1" class="tbox" value="3" />
+						<input type="Number" id="CubeeZ1" class="tbox" value="2" />
+						<br/>
+
+						<input type="Number" id="CubeeX2" class="tbox" value="0" />
+						<input type="Number" id="CubeeY2" class="tbox" value="1" />
+						<input type="Number" id="CubeeZ2" class="tbox" value="3" />
+						<br/>
+
+						<input type="Number" id="CubeeX3" class="tbox" value="1" />
+						<input type="Number" id="CubeeY3" class="tbox" value="7" />
+						<input type="Number" id="CubeeZ3" class="tbox" value="3" />
+						<br/>
+	
+						<input type="Number" id="CubeeX4" class="tbox" value="1" />
+						<input type="Number" id="CubeeY4" class="tbox" value="5" />
+						<input type="Number" id="CubeeZ4" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="CubeeX5" class="tbox" value="5" />
+						<input type="Number" id="CubeeY5" class="tbox" value="6" />
+						<input type="Number" id="CubeeZ5" class="tbox" value="7" />
+						<br/>
+						
+						<input type="Number" id="CubeeX6" class="tbox" value="5" />
+						<input type="Number" id="CubeeY6" class="tbox" value="4" />
+						<input type="Number" id="CubeeZ6" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="CubeeX7" class="tbox" value="4" />
+						<input type="Number" id="CubeeY7" class="tbox" value="2" />
+						<input type="Number" id="CubeeZ7" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="CubeeX8" class="tbox" value="4" />
+						<input type="Number" id="CubeeY8" class="tbox" value="0" />
+						<input type="Number" id="CubeeZ8" class="tbox" value="2" />
+						<br/>
+						<input type="Number" id="CubeeX9" class="tbox" value="2" />
+						<input type="Number" id="CubeeY9" class="tbox" value="7" />
+						<input type="Number" id="CubeeZ9" class="tbox" value="6" />
+						<br/>
+
+						<input type="Number" id="CubeeX10" class="tbox" value="2" />
+						<input type="Number" id="CubeeY10" class="tbox" value="3" />
+						<input type="Number" id="CubeeZ10" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="CubeeX11" class="tbox" value="4" />
+						<input type="Number" id="CubeeY11" class="tbox" value="1" />
+						<input type="Number" id="CubeeZ11" class="tbox" value="0" />
+						<br/>
+	
+						<input type="Number" id="CubeeX12" class="tbox" value="4" />
+						<input type="Number" id="CubeeY12" class="tbox" value="5" />
+						<input type="Number" id="CubeeZ12" class="tbox" value="1" />
+						<br/>
+
+						
+					
+					<button class=" " onclick="CubeFaceInput()">SubmitFaces</button>
+
+				</div>
+				
+				</div>
+
+				<div id="dodecahedronn" class="wrldcontent">
+				  
+				  <div class="ex1" >
+						<b> <h4>Scaled coordinates :</h4>
+( <span id="coordDodecx1">-0.58</span> , <span id="coordDodecy1">-0.58</span> , <span id="coordDodecz1">0.58</span>)<br>
+( <span id="coordDodecx2"> 0.93</span> , <span id="coordDodecy2"> 0.36</span> , <span id="coordDodecz2">   0</span>)<br>
+( <span id="coordDodecx3"> 0.93</span> , <span id="coordDodecy3">-0.36</span> , <span id="coordDodecz3">   0</span>)<br>
+( <span id="coordDodecx4">-0.93</span> , <span id="coordDodecy4"> 0.36</span> , <span id="coordDodecz4">   0</span>)<br>
+( <span id="coordDodecx5">-0.93</span> , <span id="coordDodecy5">-0.36</span> , <span id="coordDodecz5">   0</span>)<br>
+( <span id="coordDodecx6">    0</span> , <span id="coordDodecy6"> 0.93</span> , <span id="coordDodecz6"> 0.36</span>)<br>
+( <span id="coordDodecx7">    0</span> , <span id="coordDodecy7"> 0.93</span> , <span id="coordDodecz7">-0.36</span>)<br>
+( <span id="coordDodecx8"> 0.36</span> , <span id="coordDodecy8">    0</span> , <span id="coordDodecz8">-0.93</span>)<br>
+( <span id="coordDodecx9">-0.36</span> , <span id="coordDodecy9">    0</span> , <span id="coordDodecz9">-0.93</span>)<br>
+( <span id="coordDodecx10">    0</span> , <span id="coordDodec10">-0.93</span> , <span id="coordDodecz10">-0.36</span >)<br>
+( <span id="coordDodecx11">    0</span> , <span id="coordDodec11">-0.93</span> , <span id="coordDodecz11"> 0.36</span >)<br>
+( <span id="coordDodecx12"> 0.36</span> , <span id="coordDodec12">    0</span> , <span id="coordDodecz12"> 0.93</span >)<br>
+( <span id="coordDodecx13">-0.36</span> , <span id="coordDodecy13">   0</span> , <span id="coordDodecz13">-0.93</span >)<br>
+( <span id="coordDodecx14"> 0.58</span> , <span id="coordDodecy14"> 0.58</span> , <span id="coordDodecz14">-0.58</span>)<br>
+( <span id="coordDodecx15"> 0.58</span> , <span id="coordDodecy15"> 0.58</span> , <span id="coordDodecz15"> 0.58</span>)<br>
+( <span id="coordDodecx16">-0.58</span> , <span id="coordDodecy16"> 0.58</span> , <span id="coordDodecz16">-0.58</span>)<br>
+( <span id="coordDodecx17">-0.58</span> , <span id="coordDodecy17"> 0.58</span> , <span id="coordDodecz17"> 0.58</span>)<br>
+( <span id="coordDodecx18"> 0.58</span> , <span id="coordDodecy18">-0.58</span> , <span id="coordDodecz18">-0.58</span>)<br>
+( <span id="coordDodecx19"> 0.58</span> , <span id="coordDodecy19">-0.58</span> , <span id="coordDodecz19"> 0.58</span>)<br>
+( <span id="coordDodecx20">-0.58</span> , <span id="coordDodecy20">-0.58</span> , <span id="coordDodecz20">-0.58</span>)<br>
+</b><br>
+						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ1" class="tbox" value="0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX2" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniY2" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniZ2" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX3" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniY3" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniZ3" class="tbox" value="0" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX4" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniY4" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniZ4" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX5" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniY5" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniZ5" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX6" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY6" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniZ6" class="tbox" value="0.36" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX7" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY7" class="tbox" value="0.93" />
+						<input type="Number" id="DodecahedroniZ7" class="tbox" value="-0.36" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX8" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniY8" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ8" class="tbox" value="-0.93" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX9" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniY9" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ9" class="tbox" value="-0.93" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX10" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY10" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniZ10" class="tbox" value="-0.36" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX11" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniY11" class="tbox" value="-0.93" />
+						<input type="Number" id="DodecahedroniZ11" class="tbox" value="-0.36" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX12" class="tbox" value="0.36" />
+						<input type="Number" id="DodecahedroniY12" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ12" class="tbox" value="0.93" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX13" class="tbox" value="-0.36" />
+						<input type="Number" id="DodecahedroniY13" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroniZ13" class="tbox" value="0.93" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX14" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY14" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ14" class="tbox" value="-0.58" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX15" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY15" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ15" class="tbox" value="0.58" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroniX16" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY16" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ16" class="tbox" value="-0.58" />
+						<br/>
+						<input type="Number" id="DodecahedroniX17" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY17" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniZ17" class="tbox" value="0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX18" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY18" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ18" class="tbox" value="-0.58" />
+						<br/>
+
+						<input type="Number" id="DodecahedroniX19" class="tbox" value="0.58" />
+						<input type="Number" id="DodecahedroniY19" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ19" class="tbox" value="0.58" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroniX20" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniY20" class="tbox" value="-0.58" />
+						<input type="Number" id="DodecahedroniZ20" class="tbox" value="-0.58" />
+						<br/>
+					
+					<button class=" " onclick="DodecaInput()">SubmitVertices</button>
+					<br/><br/>
+					< faces (triangles) ><br/>
+						<input type="Number" id="DodecahedroneX1" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY1" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneZ1" class="tbox" value="18" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX2" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY2" class="tbox" value="18" />
+						<input type="Number" id="DodecahedroneZ2" class="tbox" value="11" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX3" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY3" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ3" class="tbox" value="14" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX4" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY4" class="tbox" value="13" />
+						<input type="Number" id="DodecahedroneZ4" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX5" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY5" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneZ5" class="tbox" value="17" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX6" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY6" class="tbox" value="17" />
+						<input type="Number" id="DodecahedroneZ6" class="tbox" value="2" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX7" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY7" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneZ7" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX8" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY8" class="tbox" value="19" />
+						<input type="Number" id="DodecahedroneZ8" class="tbox" value="8" />
+						<br/>
+						<input type="Number" id="DodecahedroneX9" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY9" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ9" class="tbox" value="15" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX10" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY10" class="tbox" value="16" />
+						<input type="Number" id="DodecahedroneZ10" class="tbox" value="12" />
+						<br/>
+						<input type="Number" id="DodecahedroneX11" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY11" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ11" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX12" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY12" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ12" class="tbox" value="4" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX13" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY13" class="tbox" value="15" />
+						<input type="Number" id="DodecahedroneZ13" class="tbox" value="6" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX14" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY14" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneZ14" class="tbox" value="5" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX15" class="tbox" value="3" />
+						<input type="Number" id="DodecahedroneY15" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneZ15" class="tbox" value="16" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX16" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY16" class="tbox" value="14" />
+						<input type="Number" id="DodecahedroneZ16" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX17" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY17" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneZ17" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX18" class="tbox" value="1" />
+						<input type="Number" id="DodecahedroneY18" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneZ18" class="tbox" value="13" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX19" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY19" class="tbox" value="17" />
+						<input type="Number" id="DodecahedroneZ19" class="tbox" value="9" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX20" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY20" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ20" class="tbox" value="10" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX21" class="tbox" value="2" />
+						<input type="Number" id="DodecahedroneY21" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneZ21" class="tbox" value="18" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX22" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY22" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ22" class="tbox" value="10" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX23" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY23" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneZ23" class="tbox" value="9" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX24" class="tbox" value="4" />
+						<input type="Number" id="DodecahedroneY24" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ24" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX25" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY25" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ25" class="tbox" value="19" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX26" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY26" class="tbox" value="19" />
+						<input type="Number" id="DodecahedroneZ26" class="tbox" value="9" />
+						<br/>
+						<input type="Number" id="DodecahedroneX27" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneY27" class="tbox" value="9" />
+						<input type="Number" id="DodecahedroneZ27" class="tbox" value="17" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX28" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY28" class="tbox" value="15" />
+						<input type="Number" id="DodecahedroneZ28" class="tbox" value="8" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX29" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY29" class="tbox" value="8" />
+						<input type="Number" id="DodecahedroneZ29" class="tbox" value="7" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX30" class="tbox" value="6" />
+						<input type="Number" id="DodecahedroneY30" class="tbox" value="7" />
+						<input type="Number" id="DodecahedroneZ30" class="tbox" value="13" />
+						<br/>
+	
+						<input type="Number" id="DodecahedroneX31" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY31" class="tbox" value="14" />
+						<input type="Number" id="DodecahedroneZ31" class="tbox" value="11" />
+						<br/>
+						<input type="Number" id="DodecahedroneX32" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY32" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ32" class="tbox" value="12" />
+						<br/>
+
+						<input type="Number" id="DodecahedroneX33" class="tbox" value="5" />
+						<input type="Number" id="DodecahedroneY33" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ33" class="tbox" value="16" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX34" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY34" class="tbox" value="0" />
+						<input type="Number" id="DodecahedroneZ34" class="tbox" value="12" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX35" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY35" class="tbox" value="12" />
+						<input type="Number" id="DodecahedroneZ35" class="tbox" value="11" />
+						<br/>
+						
+						<input type="Number" id="DodecahedroneX36" class="tbox" value="10" />
+						<input type="Number" id="DodecahedroneY36" class="tbox" value="11" />
+						<input type="Number" id="DodecahedroneZ36" class="tbox" value="18" />
+						<br/>
+
+						
+					
+					<button class=" " onclick="DodecFaceInput()">SubmitFaces</button>
+				</div>
+				</div>
+
+				<div id="icosahedronn" class="wrldcontent">
+				 
+				 <div class="ex1" >
+						<b> <h4>Scaled coordinates :</h4>
+(<span id="coordIcosax1">    0</span> , <span id="coordIcosay1">-0.53</span> , <span id="coordIcosaz1">0.85</span>)   <br>
+(<span id="coordIcosax2"> 0.85</span> , <span id="coordIcosay2">    0</span> , <span id="coordIcosaz2"> 0.53</span>)    <br>
+(<span id="coordIcosax3"> 0.85</span> , <span id="coordIcosay3">    0</span> , <span id="coordIcosaz3">-0.53</span>)   <br>
+(<span id="coordIcosax4">-0.85</span> , <span id="coordIcosay4">    0</span> , <span id="coordIcosaz4">-0.53</span>)  <br>
+(<span id="coordIcosax5">-0.85</span> , <span id="coordIcosay5">    0</span> , <span id="coordIcosaz5"> 0.53</span>)   <br>
+(<span id="coordIcosax6">-0.53</span> , <span id="coordIcosay6"> 0.85</span> , <span id="coordIcosaz6">    0</span>)   <br>
+(<span id="coordIcosax7"> 0.53</span> , <span id="coordIcosay7"> 0.85</span> , <span id="coordIcosaz7">    0</span>)  <br>
+(<span id="coordIcosax8"> 0.53</span> , <span id="coordIcosay8">-0.85</span> , <span id="coordIcosaz8">    0</span>)   <br>
+(<span id="coordIcosax9">-0.53</span> , <span id="coordIcosay9">-0.85</span> , <span id="coordIcosaz9">    0</span>)  <br>
+(<span id="coordIcosax10">    0</span> , <span id="coordIcosay10">-0.53</span> , <span id="coordIcosaz10">-0.85</span>)<br>
+(<span id="coordIcosax11">    0</span> , <span id="coordIcosay11"> 0.53</span> , <span id="coordIcosaz11">-0.85</span>)<br>
+(<span id="coordIcosax12">    0</span> , <span id="coordIcosay12"> 0.53</span> , <span id="coordIcosaz12"> 0.85</span>)<br>
+		</b><br>
+						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniZ1" class="tbox" value="0.85" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX2" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniY2" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ2" class="tbox" value="0.53" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX3" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniY3" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ3" class="tbox" value="-0.53" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroniX4" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniY4" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ4" class="tbox" value="-0.53" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX5" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniY5" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniZ5" class="tbox" value="0.53" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX6" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniY6" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniZ6" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX7" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniY7" class="tbox" value="0.85" />
+						<input type="Number" id="IcosahedroniZ7" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX8" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniY8" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniZ8" class="tbox" value="0" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroniX9" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniY9" class="tbox" value="-0.85" />
+						<input type="Number" id="IcosahedroniZ9" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX10" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY10" class="tbox" value="-0.53" />
+						<input type="Number" id="IcosahedroniZ10" class="tbox" value="-0.85" />
+						<br/>
+
+						<input type="Number" id="IcosahedroniX11" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY11" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniZ11" class="tbox" value="-0.85" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroniX12" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroniY12" class="tbox" value="0.53" />
+						<input type="Number" id="IcosahedroniZ12" class="tbox" value="0.85" />
+						<br/>
+
+					
+					<button class=" " onclick="IcosaInput()">SubmitVertices</button>
+					<br/><br/>
+					< faces (triangles) ><br/>
+						<input type="Number" id="IcosahedroneX1" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneY1" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneZ1" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX2" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneY2" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ2" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX3" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneY3" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneZ3" class="tbox" value="3" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX4" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneY4" class="tbox" value="3" />
+						<input type="Number" id="IcosahedroneZ4" class="tbox" value="4" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX5" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY5" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneZ5" class="tbox" value="6" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX6" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY6" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneZ6" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX7" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneY7" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneZ7" class="tbox" value="9" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX8" class="tbox" value="3" />
+						<input type="Number" id="IcosahedroneY8" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneZ8" class="tbox" value="10" />
+						<br/>
+						<input type="Number" id="IcosahedroneX9" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneY9" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneZ9" class="tbox" value="7" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX10" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY10" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ10" class="tbox" value="8" />
+						<br/>
+						<input type="Number" id="IcosahedroneX11" class="tbox" value="1" />
+						<input type="Number" id="IcosahedroneY11" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneZ11" class="tbox" value="11" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX12" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneY12" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneZ12" class="tbox" value="0" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX13" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY13" class="tbox" value="2" />
+						<input type="Number" id="IcosahedroneZ13" class="tbox" value="6" />
+						<br/>
+	
+						<input type="Number" id="IcosahedroneX14" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY14" class="tbox" value="6" />
+						<input type="Number" id="IcosahedroneZ14" class="tbox" value="1" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX15" class="tbox" value="10" />
+						<input type="Number" id="IcosahedroneY15" class="tbox" value="5" />
+						<input type="Number" id="IcosahedroneZ15" class="tbox" value="3" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX16" class="tbox" value="11" />
+						<input type="Number" id="IcosahedroneY16" class="tbox" value="4" />
+						<input type="Number" id="IcosahedroneZ16" class="tbox" value="5" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX17" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneY17" class="tbox" value="7" />
+						<input type="Number" id="IcosahedroneZ17" class="tbox" value="2" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX18" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY18" class="tbox" value="1" />
+						<input type="Number" id="IcosahedroneZ18" class="tbox" value="7" />
+						<br/>
+						
+						<input type="Number" id="IcosahedroneX19" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneY19" class="tbox" value="9" />
+						<input type="Number" id="IcosahedroneZ19" class="tbox" value="3" />
+						<br/>
+
+						<input type="Number" id="IcosahedroneX20" class="tbox" value="0" />
+						<input type="Number" id="IcosahedroneY20" class="tbox" value="8" />
+						<input type="Number" id="IcosahedroneZ20" class="tbox" value="4" />
+						<br/>
+
+					<button class=" " onclick="IcosaFaceInput()">SubmitFaces</button>
+				</div> 
+				  
+				</div>
+
+</div>
+
+<div id="Display" class="tabcontent">
+
+
+
 			<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true" />Show the simulation in 3D<br><br>	
 				<input type="checkbox" id="lockVertices" onclick="lockV()" checked="true"/>Lock vertices in the screen<br><br>
 				<script type="text/javascript"> lockV(); </script>
@@ -94,10 +795,7 @@
 				<input type="checkbox" id="zxAxis" onclick="drawZX()" />Draw ZX grid in the screen<br><br>
 				<!--<input type="checkbox" id="2DCamera" onclick="camera2D()" checked="true"/>Show the simulation in 3D<br><br>-->
 				<input type="checkbox" id="animation" onclick="startAnimation()" checked="true"/>Show Animation structure
-				<br><br>Limit for Scaling Factors -> X:
-				<input type="Number" id="ScaleX" class="tbox" value="2" />Y:
-				<input type="Number" id="ScaleY" class="tbox" value="3" />Z:
-				<input type="Number" id="ScaleZ" class="tbox" value="1" />
+				
 				<br><br>Scale by individual directions -><br> X:
 				<input type="Number" id="ScaleIX" class="tbox" value="1" />
 				<td><button class=" " onclick="IXScale()">Submit</button></td><br>Y:
@@ -105,21 +803,12 @@
 				<td><button class=" " onclick="IYScale()">Submit</button></td><br>Z:
 				<input type="Number" id="ScaleIZ" class="tbox" value="1" />
 				<td><button class=" " onclick="IZScale()">Submit</button></td>
-				<br><br>
+				<!--br><br>The Limit for Scaling Factors is -> X:
+				<input type="Number" id="ScaleX" class="tbox" value="5" disabled="true" />Y:
+				<input type="Number" id="ScaleY" class="tbox" value="5" disabled="true"/>Z:
+				<input type="Number" id="ScaleZ" class="tbox" value="5" disabled="true" /-->
+				
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

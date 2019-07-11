@@ -4,7 +4,6 @@
 
 
 body {
-  margin: 8px;
   padding: 0px;
   border: 0px;
   background-color: #42f4b0;
@@ -48,7 +47,7 @@ body {
 html, body {
   height: 100%;
 }
-table {
+table.tabb {
   border: 1px solid;
   text-align: center;
   border-color: rgba(0, 132, 242, 0.5);
@@ -56,7 +55,7 @@ table {
 }
 
 td, tr{
-  padding: 1px 1px 1px 1px;
+  padding: 2px 2px 2px 2px;
   font-weight: bold;
 }
 
@@ -97,8 +96,8 @@ td, tr{
 }
 
 .tbox {
-  width: 40px;
-  height: 10px;
+  width: 60px;
+  height: 30px;
 }
 
 .displayFeatures {
@@ -124,9 +123,6 @@ td, tr{
     background-color: white;
 }
 
-canvas {
-    display: block;
-}
 
 
 
@@ -221,4 +217,167 @@ canvas {
     border: thin solid black;
     font-size:80%;
     float: left;
+}
+
+
+
+#renderCanvas {
+                
+            }
+
+
+#canvas-holder {
+    float:left;
+    margin-right:10px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+
+
+#sliders {
+        background: none;
+    }
+
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+#canvas-holder {
+    float:left;
+    margin-right:10px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+canvas {
+    display: block;
+}
+
+.cubebox{
+  height: 50px;
+  width :400px;
+  border: 2px solid black;
+}
+
+div.ex1 {
+  background-color: #42f4b0;
+  width: 500px;
+  height: 340px;
+  overflow: auto;
+}
+
+
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width:600px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+
+.wrld {
+  overflow: hidden;
+  border: 1px solid 'black';
+  background-color: #f1f1f1;
+  width:400px;
+
+}
+
+/* Style the buttons inside the tab */
+.wrld button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  padding: 10px 12px;
+}
+
+/* Change background color of buttons on hover */
+.wrld button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.wrld button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.wrldcontent {
+  display: none;
+  padding: 8px 8px;
+  border: 1px solid 'black';
+  border-top: none;
+
 }
