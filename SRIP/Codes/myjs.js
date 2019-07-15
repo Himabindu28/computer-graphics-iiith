@@ -1,7 +1,7 @@
 var scene = new THREE.Scene();
 
-var heightScreen = 600;
-var widthScreen = 700;
+var heightScreen =500;
+var widthScreen = 500;
 var camera = new THREE.PerspectiveCamera( 60, widthScreen/heightScreen, 0.001, 100000 );
 
 var camera2 = new THREE.OrthographicCamera(	widthScreen / -900, 
@@ -12,7 +12,7 @@ var camera2 = new THREE.OrthographicCamera(	widthScreen / -900,
 											100000 );
 
 var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true});
-renderer.setSize( 700,600);
+renderer.setSize( 500,500);
 
 var canvas = document.getElementById("mainCanvas");
 var ctx = canvas.getContext("2d");
@@ -1949,7 +1949,10 @@ function TriTrans(){
 
 function IXScale() {
 	var six = Number(document.getElementById('ScaleIX').value);
-
+	if(six>5){
+		document.getElementById('Xlimit').innerHTML = " Limit to scale by X axis is 5. Please enter value less than 5";
+	}
+	else{document.getElementById('Xlimit').innerHTML = "";}
 
 var conditionAnimation = document.getElementById('animation').checked;
 	if(conditionAnimation==true){
@@ -2001,7 +2004,10 @@ var conditionAnimation = document.getElementById('animation').checked;
 
 function IYScale() {
 	var siy = Number(document.getElementById('ScaleIY').value);
-
+	if(siy>5){
+		document.getElementById('Ylimit').innerHTML = " Limit to scale by Y axis is 5. Please enter value less than 5";
+	}
+	else{document.getElementById('Ylimit').innerHTML = "";}
 	var conditionAnimation = document.getElementById('animation').checked;
 	if(conditionAnimation==true){
 
@@ -2053,7 +2059,10 @@ function IYScale() {
 
 function IZScale() {	
 	var siz = Number(document.getElementById('ScaleIZ').value);
-
+	if(siz>5){
+		document.getElementById('Zlimit').innerHTML = " Limit to scale by Z axis is 5. Please enter value less than 5";
+	}
+	else{document.getElementById('Zlimit').innerHTML = "";}
 
 	var conditionAnimation = document.getElementById('animation').checked;
 	if(conditionAnimation==true){
@@ -2587,26 +2596,50 @@ function startAnimation() {
 scene.add(triangle);
 
 
-function openFig(evt, TabName) {
 
-  var i, wrldcontent, wrldlinks;
 
-  wrldcontent = document.getElementsByClassName("wrldcontent");
-
-  for (i = 0; i < wrldcontent.length; i++) {
-    wrldcontent[i].style.display = "none";
-  }
-
-  wrldlinks = document.getElementsByClassName("wrldlinks");
-
-  for (i = 0; i < wrldlinks.length; i++) {
-    wrldlinks[i].className = wrldlinks[i].className.replace(" active", "");
-  }
-
-  document.getElementById(TabName).style.display = "block";
-  evt.currentTarget.className += " active";
+function openFig(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("wrldcontent");
+   
+    tablinks = document.getElementsByClassName("wrldlinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    var prev_state_display = document.getElementById(cityName).style.display;
+    
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    if( prev_state_display === "none"){
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } else {
+        document.getElementById(cityName).style.display = "none";
+        evt.currentTarget.className.replace(" active", "");
+    }
 }
 
+
+function openCord(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("cordcontent");
+   
+    tablinks = document.getElementsByClassName("cordlinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    var prev_state_display = document.getElementById(cityName).style.display;
+
+    if( prev_state_display === "none"){
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } else {
+        document.getElementById(cityName).style.display = "none";
+        evt.currentTarget.className.replace(" active", "");
+    }
+}
 
 function openTab(evt, TabName) {
 
@@ -3029,6 +3062,7 @@ function IcosaCoord(){
 	
 }
 }
+
 
 
 

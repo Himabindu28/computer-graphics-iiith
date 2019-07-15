@@ -11,122 +11,102 @@
 </head>
 
 <body>
+	<div id="content">
+	<h3 class="styletitle" style="text-align: center;"> Experiment 4 : Transformation - Scaling </h3>
 <!--canvas id="renderCanvas" style="width: 7px;height: 7px;"></canvas-->
 		<script src="../Libraries/three.js"></script>
 		<script src="../Libraries/three.min.js"></script>
 		<script src="../Libraries/OrbitControls.js"></script>
-<div id="content">
+
+
 
 <div id="canvas-holder">
-<canvas id="mainCanvas" width="700" height="600"></canvas>
+<canvas id="mainCanvas"></canvas>
 <script type="text/javascript" src="myjs.js"></script>
-<input type="range" class="slider" min="1" max="5" value="1" step="0.01" onchange="sliderChange(this.value)"                  onclick="addScale()"/> 
+<br>
+<input type="range" class="slider" min="1" max="5" value="1" step="0.01" onchange="sliderChange(this.value)"  onclick="addScale()"/> 
 			
 
-<br/>Scaling factor= <span id="sliderStatus">1</span> 
+<span class="smallsize"> Scaling factor : </span><span id="sliderStatus">1</span> 
 </div>
 
 
 <div class="tab">
 
-  <button class="tablinks" onclick="openTab(event, 'Manual')">Manual</button>
-  <button class="tablinks" onclick="openTab(event, 'World')">World</button>
+ 
+  <button class="tablinks" onclick="openTab(event, 'World')" id="defaultOpen">World</button>
   <button class="tablinks" onclick="openTab(event, 'Display')">Display</button>
 
 </div>
-		<div id="Manual" class= "tabcontent">
-			<iframe src = "1.html" style="width:600px;height:400px;">
-		                Sorry your browser does not support inline frames.
-		             </iframe>
-
-		</div>
 		
-	<div id="World" class="tabcontent">
+		
+	<div id="World" class="tabcontent" >
 
 
-  
-				<table class=tabb>
-				<tr>
-					<th>Name</th>
-					<th>Draw feature</th>
-					<th>Active feature</th>
-					<th>X-units</th>
-					<th>Y-units</th>
-					<th>Z-untis</th>
-					<th>Submit</th>
-					<!--th>Vertices<th-->
-				</tr>
-				<tr>
-					<td>Instance 1</td>
-					<td><input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw</td>
-					<td><input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active</td>
-					<td><input type="Number" id="TriX" class="tbox" value="0" /></td>
-					<td><input type="Number" id="TriY" class="tbox" value="0" /></td>
-					<td><input type="Number" id="TriZ" class="tbox" value="0" /></td>
-					<td><button class=" " onclick="TriTrans()">Submit</button></td>
-
-				</tr>
-				<tr>
-					<td>Cube</td>
-					<td><input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw</td>
-					<td><input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active</td>
-					<td><input type="Number" id="CubeX" class="tbox" value="0" /></td>
-					<td><input type="Number" id="CubeY" class="tbox" value="0" /></td>
-					<td><input type="Number" id="CubeZ" class="tbox" value="0" /></td>
-					<td><button class=" " onclick="CubeTrans()">Submit</button></td>
-
-
-				</tr>
-				<tr>
-					<td>Icosahedron</td>
-					<td><input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw</td>
-					<td><input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active</td>
-					<td><input type="Number" id="IcoX" class="tbox" value="0" /></td>
-					<td><input type="Number" id="IcoY" class="tbox" value="0" /></td>
-					<td><input type="Number" id="IcoZ" class="tbox" value="0" /></td>
-					<td><button class=" " onclick="IcosaTrans()">Submit</button></td>
-					<!--td><button class=" " onclick="IcosaInput()">Submit</button></td-->
-				</tr>
-				<tr>
-					<td>Dodecahedron</td>
-					<td><input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw</td>
-
-					<td><input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active</td>
-
-					<td><input type="Number" id="DodecX" class="tbox" value="0" /></td>
-
-					<td><input type="Number" id="DodecY" class="tbox" value="0" /></td>
-
-					<td><input type="Number" id="DodecZ" class="tbox" value="0" /></td>
-
-					<td><button class=" " onclick="DodecTrans()">Submit</button></td>
-					<!--td><button class=" " onclick="DodecInput()">Submit</button></td-->
-				</tr>
-				</table>
-
-				<h4>Click below to change the vertices and faces of the following figures("Draw" checbox should be checked to observe the changes)</h4>
-
+			<iframe src = "1.html" style="width:500px;height:180px;" class ="iframetab">
+		                Sorry your browser does not support inline frames.
+		             </iframe><br>
+		               World
+		              <br>
+				
+		             <!--h4 >Click below to change the vertices and faces of the following figures
+		              <br> 
+		             ("Draw" checbox should be checked to observe the changes)</h4-->
 				<div class="wrld">
 
-				  <button class="wrldlinks" onclick="openFig(event, 'trianglee')">Instance1</button>
+
+				  <button class="wrldlinks" onclick="openFig(event, 'trianglee')" id="defaultx">Instance1</button>
 
 				  <button class="wrldlinks" onclick="openFig(event, 'cubee')">cube</button>
 
+				  <button class="wrldlinks" onclick="openFig(event, 'dodecahedronn')">Dodecahedron</button>
+
 				  <button class="wrldlinks" onclick="openFig(event, 'icosahedronn')">Icosahedron</button>
 
-				  <button class="wrldlinks" onclick="openFig(event, 'dodecahedronn')">Dodecahedron</button>
 				 
 				</div>
 
 				<div id="trianglee" class="wrldcontent" >
 					<div class="ex1">
-				  <b> <h4>Scaled coordinates :</h4>
-			(<span id="coordTrix1">4</span> , <span id="coordTriy1">3</span> , <span id="coordTriz1">0</span>)<br>
-			(<span id="coordTrix2">0</span> , <span id="coordTriy2">4</span> , <span id="coordTriz2">0</span>)<br>
-			(<span id="coordTrix3">2</span> , <span id="coordTriy3">1</span> , <span id="coordTriz3">0</span>)<br>
+					<span onclick="openFig(event, 'trianglee')" class="topright">&times</span>
+					
+
+						<button class="cordlink" onclick="openCord(event, 'Cord')"  >Coordinate System</button><br>
+						<div id="Cord" class="cordcontent">
+							
+							<span onclick="openCord(event, 'Cord')" class="topright">&times</span>
+						X:
+					<input type="Number" id="TriX" class="tbox" value="0" />
+					<br>Y:
+					<input type="Number" id="TriY" class="tbox" value="0" />
+					<br>Z:
+					<input type="Number" id="TriZ" class="tbox" value="0" /><br>
+					<button class=" " onclick="TriTrans()">Submit</button>
+					<br>
+				
+				</div>
 			
-		</b><br>
-						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+
+
+						<button class="cordlink" onclick="openCord(event, 'Trans1')"  >Transformation 1</button><br>
+						<div id="Trans1" class="cordcontent">
+							<span onclick="openCord(event, 'Trans1')" class="topright">&times</span>
+						
+
+					<input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw<br>
+					<input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active<br>
+				</div>
+
+						<button class="cordlink" onclick="openCord(event, 'Shape1')"  >-> Shape 1</button><br>
+						<div id="Shape1" class="cordcontent">
+							<span onclick="openCord(event, 'Shape1')" class="topright">&times</span>
+
+
+						<button class="cordlink" onclick="openCord(event, 'verticec')"  >---> Vertices</button><br>
+						<div id="verticec" class="cordcontent">
+							<span onclick="openCord(event, 'verticec')" class="topright">&times</span>
+
+							Click to change the original coordinates<br/>
 					    <input type="Number" id="TriangleiX1" class="tbox" value="4" />
 						<input type="Number" id="TriangleiY1" class="tbox" value="3" />
 						<input type="Number" id="TriangleiZ1" class="tbox" value="0" />
@@ -144,7 +124,13 @@
 					
 					<button class=" " onclick="TriInput()">SubmitVertices</button>
 					<br/>
-					<br/>
+				</div>
+
+
+				<button class="cordlink" onclick="openCord(event, 'facec')"  > ---> Face</button><br>
+						<div id="facec" class="cordcontent">
+							<span onclick="openCord(event, 'facec')" class="topright">&times</span>
+				
 					< Triangles (faces) ><br/>
 						<input type="Number" id="TriangleeX" class="tbox" value="0" />
 						<input type="Number" id="TriangleeY" class="tbox" value="1" />
@@ -152,24 +138,58 @@
 						<br/>
 					
 					<button class=" " onclick="TriFaceInput()">SubmitFaces</button>
-				</p>
-				
-				
-		</div>
+				</div>
+</div>
+
+						<button class="cordlink" onclick="openCord(event, 'Scaledc')"  >ScaledCoordinates</button><br>
+						<div id="Scaledc" class="cordcontent">
+							<span onclick="openCord(event, 'Scaledc')" class="topright">&times</span>
+						
+			(<span id="coordTrix1">4</span> , <span id="coordTriy1">3</span> , <span id="coordTriz1">0</span>)<br>
+			(<span id="coordTrix2">0</span> , <span id="coordTriy2">4</span> , <span id="coordTriz2">0</span>)<br>
+			(<span id="coordTrix3">2</span> , <span id="coordTriy3">1</span> , <span id="coordTriz3">0</span>)<br>
+<br>
+	</div>
+</div>
+</div>
+
+
+				<div id="cubee" class="wrldcontent" >
+					<div class="ex1" >
+						<button class="cordlink" onclick="openCord(event, 'Cordc')"  >Coordinate System</button><br>
+						<div id="Cordc" class="cordcontent">
+							
+							<span onclick="openCord(event, 'Cordc')" class="topright">&times</span>
+						X:
+						<input type="Number" id="CubeX" class="tbox" value="0" /><br>
+						Y:
+					<input type="Number" id="CubeY" class="tbox" value="0" /><br>
+					Z:
+					<input type="Number" id="CubeZ" class="tbox" value="0" /><br>
+					<button class=" " onclick="CubeTrans()">Submit</button><br>
+						
 				</div>
 
-				<div id="cubee" class="wrldcontent"  >
-					<div class="ex1" >
-						<b> <h4>Scaled coordinates :</h4>
-			(<span id="coordCubex1">-1</span> , <span id="coordCubey1">-1</span> , <span id="coordCubez1">1</span>)<br>
-			(<span id="coordCubex2">1</span> , <span id="coordCubey2">-1</span> , <span id="coordCubez2">1</span>)<br>
-			(<span id="coordCubex3">-1</span> , <span id="coordCubey3">1</span> , <span id="coordCubez3">1</span>)<br>
-			(<span id="coordCubex4">1</span> , <span id="coordCubey4">1</span> , <span id="coordCubez4">1</span> )<br>
-			(<span id="coordCubex5">-1</span> , <span id="coordCubey5">-1</span> , <span id="coordCubez5">-1</span>)<br>
-			(<span id="coordCubex6">1</span> , <span id="coordCubey6">-1</span> , <span id="coordCubez6">-1</span>)<br>
-			(<span id="coordCubex7">-1</span> , <span id="coordCubey7">1</span> , <span id="coordCubez7">-1</span>)<br>
-			(<span id="coordCubex8">1</span> , <span id="coordCubey8">1</span> , <span id="coordCubez8">-1</span>)<br>
-		</b><br>
+				<button class="cordlink" onclick="openCord(event, 'Trans1c')"  >Transformation 1</button><br>
+						<div id="Trans1c" class="cordcontent">
+							<span onclick="openCord(event, 'Trans1c')" class="topright">&times</span>
+						
+						<input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
+						<input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active
+					
+					<br>
+				</div>
+
+					<button class="cordlink" onclick="openCord(event, 'Shape1c')"  >-> Shape 1</button>
+						<div id="Shape1c" class="cordcontent">
+							<span onclick="openCord(event, 'Shape1c')" class="topright">&times</span>
+
+
+						<button class="cordlink" onclick="openCord(event, 'verticecc')"  >---> Vertices</button><br>
+						<div id="verticecc" class="cordcontent">
+							<span onclick="openCord(event, 'verticecc')" class="topright">&times</span>
+
+						
 						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
 					    <input type="Number" id="CubeiX1" class="tbox" value="-1" />
 						<input type="Number" id="CubeiY1" class="tbox" value="-1" />
@@ -215,8 +235,14 @@
 					<button class=" " onclick="CubeInput()">SubmitVertices</button>
 		
 
-				
+				</div>
+
 					<br/><br/>
+
+					<button class="cordlink" onclick="openCord(event, 'facecc')"  > ---> Face</button><br>
+						<div id="facecc" class="cordcontent">
+							<span onclick="openCord(event, 'facecc')" class="topright">&times</span>
+				
 					< faces (triangles) ><br/>
 						<input type="Number" id="CubeeX1" class="tbox" value="0" />
 						<input type="Number" id="CubeeY1" class="tbox" value="3" />
@@ -282,34 +308,69 @@
 					<button class=" " onclick="CubeFaceInput()">SubmitFaces</button>
 
 				</div>
+			</div><br>
+
+				<button class="cordlink" onclick="openCord(event, 'Scaledcc')"  >ScaledCoordinates</button>
+						<div id="Scaledcc" class="cordcontent">
+							<span onclick="openCord(event, 'Scaledcc')" class="topright">&times</span>
+
+							<b> <h4>Scaled coordinates :</h4>
+			(<span id="coordCubex1">-1</span> , <span id="coordCubey1">-1</span> , <span id="coordCubez1">1</span>)<br>
+			(<span id="coordCubex2">1</span> , <span id="coordCubey2">-1</span> , <span id="coordCubez2">1</span>)<br>
+			(<span id="coordCubex3">-1</span> , <span id="coordCubey3">1</span> , <span id="coordCubez3">1</span>)<br>
+			(<span id="coordCubex4">1</span> , <span id="coordCubey4">1</span> , <span id="coordCubez4">1</span> )<br>
+			(<span id="coordCubex5">-1</span> , <span id="coordCubey5">-1</span> , <span id="coordCubez5">-1</span>)<br>
+			(<span id="coordCubex6">1</span> , <span id="coordCubey6">-1</span> , <span id="coordCubez6">-1</span>)<br>
+			(<span id="coordCubex7">-1</span> , <span id="coordCubey7">1</span> , <span id="coordCubez7">-1</span>)<br>
+			(<span id="coordCubex8">1</span> , <span id="coordCubey8">1</span> , <span id="coordCubez8">-1</span>)<br>
+		</b><br>
+
+						</div>
+
 				
 				</div>
+</div>
 
-				<div id="dodecahedronn" class="wrldcontent">
-				  
-				  <div class="ex1" >
-						<b> <h4>Scaled coordinates :</h4>
-( <span id="coordDodecx1">-0.58</span> , <span id="coordDodecy1">-0.58</span> , <span id="coordDodecz1">0.58</span>)<br>
-( <span id="coordDodecx2"> 0.93</span> , <span id="coordDodecy2"> 0.36</span> , <span id="coordDodecz2">   0</span>)<br>
-( <span id="coordDodecx3"> 0.93</span> , <span id="coordDodecy3">-0.36</span> , <span id="coordDodecz3">   0</span>)<br>
-( <span id="coordDodecx4">-0.93</span> , <span id="coordDodecy4"> 0.36</span> , <span id="coordDodecz4">   0</span>)<br>
-( <span id="coordDodecx5">-0.93</span> , <span id="coordDodecy5">-0.36</span> , <span id="coordDodecz5">   0</span>)<br>
-( <span id="coordDodecx6">    0</span> , <span id="coordDodecy6"> 0.93</span> , <span id="coordDodecz6"> 0.36</span>)<br>
-( <span id="coordDodecx7">    0</span> , <span id="coordDodecy7"> 0.93</span> , <span id="coordDodecz7">-0.36</span>)<br>
-( <span id="coordDodecx8"> 0.36</span> , <span id="coordDodecy8">    0</span> , <span id="coordDodecz8">-0.93</span>)<br>
-( <span id="coordDodecx9">-0.36</span> , <span id="coordDodecy9">    0</span> , <span id="coordDodecz9">-0.93</span>)<br>
-( <span id="coordDodecx10">    0</span> , <span id="coordDodec10">-0.93</span> , <span id="coordDodecz10">-0.36</span >)<br>
-( <span id="coordDodecx11">    0</span> , <span id="coordDodec11">-0.93</span> , <span id="coordDodecz11"> 0.36</span >)<br>
-( <span id="coordDodecx12"> 0.36</span> , <span id="coordDodec12">    0</span> , <span id="coordDodecz12"> 0.93</span >)<br>
-( <span id="coordDodecx13">-0.36</span> , <span id="coordDodecy13">   0</span> , <span id="coordDodecz13">-0.93</span >)<br>
-( <span id="coordDodecx14"> 0.58</span> , <span id="coordDodecy14"> 0.58</span> , <span id="coordDodecz14">-0.58</span>)<br>
-( <span id="coordDodecx15"> 0.58</span> , <span id="coordDodecy15"> 0.58</span> , <span id="coordDodecz15"> 0.58</span>)<br>
-( <span id="coordDodecx16">-0.58</span> , <span id="coordDodecy16"> 0.58</span> , <span id="coordDodecz16">-0.58</span>)<br>
-( <span id="coordDodecx17">-0.58</span> , <span id="coordDodecy17"> 0.58</span> , <span id="coordDodecz17"> 0.58</span>)<br>
-( <span id="coordDodecx18"> 0.58</span> , <span id="coordDodecy18">-0.58</span> , <span id="coordDodecz18">-0.58</span>)<br>
-( <span id="coordDodecx19"> 0.58</span> , <span id="coordDodecy19">-0.58</span> , <span id="coordDodecz19"> 0.58</span>)<br>
-( <span id="coordDodecx20">-0.58</span> , <span id="coordDodecy20">-0.58</span> , <span id="coordDodecz20">-0.58</span>)<br>
-</b><br>
+
+
+		<div id="dodecahedronn" class="wrldcontent">
+					<div class="ex1" >
+						<button class="cordlink" onclick="openCord(event, 'Cordd')"  >Coordinate System</button><br>
+						<div id="Cordd" class="cordcontent">
+							
+							<span onclick="openCord(event, 'Cordd')" class="topright">&times</span>
+						
+							X:
+					<input type="Number" id="DodecX" class="tbox" value="0" /><br>
+								Y:
+					<input type="Number" id="DodecY" class="tbox" value="0" /><br>
+					Z:
+
+					<input type="Number" id="DodecZ" class="tbox" value="0" /><br>
+
+					<button class=" " onclick="DodecTrans()">Submit
+					</button>
+				</div>
+
+				  <button class="cordlink" onclick="openCord(event, 'Trans1d')"  >Transformation 1</button><br>
+						<div id="Trans1d" class="cordcontent">
+							<span onclick="openCord(event, 'Trans1d')" class="topright">&times</span>
+					<input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>
+					Draw<br>
+					<input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>
+					Active
+					<br>
+				</div>
+
+				<button class="cordlink" onclick="openCord(event, 'Shape1d')"  >-> Shape 1</button>
+						<div id="Shape1d" class="cordcontent">
+							<span onclick="openCord(event, 'Shape1d')" class="topright">&times</span>
+
+
+						<button class="cordlink" onclick="openCord(event, 'verticecd')"  >---> Vertices</button><br>
+						<div id="verticecd" class="cordcontent">
+							<span onclick="openCord(event, 'verticecd')" class="topright">&times</span>
+
 						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
 					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" />
 						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" />
@@ -411,7 +472,12 @@
 						<br/>
 					
 					<button class=" " onclick="DodecaInput()">SubmitVertices</button>
-					<br/><br/>
+					<br/></div>
+					<button class="cordlink" onclick="openCord(event, 'facecd')"  > ---> Face</button><br>
+						<div id="facecd" class="cordcontent">
+							<span onclick="openCord(event, 'facecd')" class="topright">&times</span>
+				
+
 					< faces (triangles) ><br/>
 						<input type="Number" id="DodecahedroneX1" class="tbox" value="1" />
 						<input type="Number" id="DodecahedroneY1" class="tbox" value="2" />
@@ -594,24 +660,77 @@
 					<button class=" " onclick="DodecFaceInput()">SubmitFaces</button>
 				</div>
 				</div>
+				<br>
+				<button class="cordlink" onclick="openCord(event, 'Scaledcd')"  >ScaledCoordinates</button>
+						<div id="Scaledcd" class="cordcontent">
+							<span onclick="openCord(event, 'Scaledcd')" class="topright">&times</span>
+
+
+						<b> <h4>Scaled coordinates :</h4>
+						( <span id="coordDodecx1">-0.58</span> , <span id="coordDodecy1">-0.58</span> , <span id="coordDodecz1">0.58</span>)<br>
+						( <span id="coordDodecx2"> 0.93</span> , <span id="coordDodecy2"> 0.36</span> , <span id="coordDodecz2">   0</span>)<br>
+						( <span id="coordDodecx3"> 0.93</span> , <span id="coordDodecy3">-0.36</span> , <span id="coordDodecz3">   0</span>)<br>
+						( <span id="coordDodecx4">-0.93</span> , <span id="coordDodecy4"> 0.36</span> , <span id="coordDodecz4">   0</span>)<br>
+						( <span id="coordDodecx5">-0.93</span> , <span id="coordDodecy5">-0.36</span> , <span id="coordDodecz5">   0</span>)<br>
+						( <span id="coordDodecx6">    0</span> , <span id="coordDodecy6"> 0.93</span> , <span id="coordDodecz6"> 0.36</span>)<br>
+						( <span id="coordDodecx7">    0</span> , <span id="coordDodecy7"> 0.93</span> , <span id="coordDodecz7">-0.36</span>)<br>
+						( <span id="coordDodecx8"> 0.36</span> , <span id="coordDodecy8">    0</span> , <span id="coordDodecz8">-0.93</span>)<br>
+						( <span id="coordDodecx9">-0.36</span> , <span id="coordDodecy9">    0</span> , <span id="coordDodecz9">-0.93</span>)<br>
+						( <span id="coordDodecx10">    0</span> , <span id="coordDodec10">-0.93</span> , <span id="coordDodecz10">-0.36</span >)<br>
+						( <span id="coordDodecx11">    0</span> , <span id="coordDodec11">-0.93</span> , <span id="coordDodecz11"> 0.36</span >)<br>
+						( <span id="coordDodecx12"> 0.36</span> , <span id="coordDodec12">    0</span> , <span id="coordDodecz12"> 0.93</span >)<br>
+						( <span id="coordDodecx13">-0.36</span> , <span id="coordDodecy13">   0</span> , <span id="coordDodecz13">-0.93</span >)<br>
+						( <span id="coordDodecx14"> 0.58</span> , <span id="coordDodecy14"> 0.58</span> , <span id="coordDodecz14">-0.58</span>)<br>
+						( <span id="coordDodecx15"> 0.58</span> , <span id="coordDodecy15"> 0.58</span> , <span id="coordDodecz15"> 0.58</span>)<br>
+						( <span id="coordDodecx16">-0.58</span> , <span id="coordDodecy16"> 0.58</span> , <span id="coordDodecz16">-0.58</span>)<br>
+						( <span id="coordDodecx17">-0.58</span> , <span id="coordDodecy17"> 0.58</span> , <span id="coordDodecz17"> 0.58</span>)<br>
+						( <span id="coordDodecx18"> 0.58</span> , <span id="coordDodecy18">-0.58</span> , <span id="coordDodecz18">-0.58</span>)<br>
+						( <span id="coordDodecx19"> 0.58</span> , <span id="coordDodecy19">-0.58</span> , <span id="coordDodecz19"> 0.58</span>)<br>
+						( <span id="coordDodecx20">-0.58</span> , <span id="coordDodecy20">-0.58</span> , <span id="coordDodecz20">-0.58</span>)<br>
+						</b><br>
+
+						</div>
+				</div>
+			</div>
+
+
+
+
 
 				<div id="icosahedronn" class="wrldcontent">
 				 
+
 				 <div class="ex1" >
-						<b> <h4>Scaled coordinates :</h4>
-(<span id="coordIcosax1">    0</span> , <span id="coordIcosay1">-0.53</span> , <span id="coordIcosaz1">0.85</span>)   <br>
-(<span id="coordIcosax2"> 0.85</span> , <span id="coordIcosay2">    0</span> , <span id="coordIcosaz2"> 0.53</span>)    <br>
-(<span id="coordIcosax3"> 0.85</span> , <span id="coordIcosay3">    0</span> , <span id="coordIcosaz3">-0.53</span>)   <br>
-(<span id="coordIcosax4">-0.85</span> , <span id="coordIcosay4">    0</span> , <span id="coordIcosaz4">-0.53</span>)  <br>
-(<span id="coordIcosax5">-0.85</span> , <span id="coordIcosay5">    0</span> , <span id="coordIcosaz5"> 0.53</span>)   <br>
-(<span id="coordIcosax6">-0.53</span> , <span id="coordIcosay6"> 0.85</span> , <span id="coordIcosaz6">    0</span>)   <br>
-(<span id="coordIcosax7"> 0.53</span> , <span id="coordIcosay7"> 0.85</span> , <span id="coordIcosaz7">    0</span>)  <br>
-(<span id="coordIcosax8"> 0.53</span> , <span id="coordIcosay8">-0.85</span> , <span id="coordIcosaz8">    0</span>)   <br>
-(<span id="coordIcosax9">-0.53</span> , <span id="coordIcosay9">-0.85</span> , <span id="coordIcosaz9">    0</span>)  <br>
-(<span id="coordIcosax10">    0</span> , <span id="coordIcosay10">-0.53</span> , <span id="coordIcosaz10">-0.85</span>)<br>
-(<span id="coordIcosax11">    0</span> , <span id="coordIcosay11"> 0.53</span> , <span id="coordIcosaz11">-0.85</span>)<br>
-(<span id="coordIcosax12">    0</span> , <span id="coordIcosay12"> 0.53</span> , <span id="coordIcosaz12"> 0.85</span>)<br>
-		</b><br>
+				 	<button class="cordlink" onclick="openCord(event, 'Cordi')"  >Coordinate System</button><br>
+						<div id="Cordi" class="cordcontent">
+							
+							<span onclick="openCord(event, 'Cordi')" class="topright">&times</span>
+						X:
+				 	<input type="Number" id="IcoX" class="tbox" value="0" /><br>
+				 	Y:
+					<input type="Number" id="IcoY" class="tbox" value="0" /><br>
+					Z:
+					<input type="Number" id="IcoZ" class="tbox" value="0" /><br>
+
+					<button class=" " onclick="IcosaTrans()">Submit</button>
+				 	<br>
+				 </div>
+				 <button class="cordlink" onclick="openCord(event, 'Trans1i')"  >Transformation 1</button><br>
+						<div id="Trans1i" class="cordcontent">
+							<span onclick="openCord(event, 'Trans1i')" class="topright">&times</span>
+
+				 			<input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw<br>
+					<input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active<br>
+					</div>
+					<button class="cordlink" onclick="openCord(event, 'Shape1i')"  >Shape 1</button><br>
+					<div id="Shape1i" class="cordcontent">
+							<span onclick="openCord(event, 'Shape1i')" class="topright">&times</span>
+
+
+						<button class="cordlink" onclick="openCord(event, 'verticeci')"  >---> Vertices</button><br>
+						<div id="verticeci" class="cordcontent">
+							<span onclick="openCord(event, 'verticeci')" class="topright">&times</span>
+
 						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
 					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0" />
 						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53" />
@@ -675,7 +794,11 @@
 
 					
 					<button class=" " onclick="IcosaInput()">SubmitVertices</button>
-					<br/><br/>
+					<br/></div><br/>
+					<button class="cordlink" onclick="openCord(event, 'faceci')"  > ---> Face</button><br>
+						<div id="faceci" class="cordcontent">
+							<span onclick="openCord(event, 'faceci')" class="topright">&times</span>
+				
 					< faces (triangles) ><br/>
 						<input type="Number" id="IcosahedroneX1" class="tbox" value="6" />
 						<input type="Number" id="IcosahedroneY1" class="tbox" value="2" />
@@ -775,12 +898,36 @@
 						<input type="Number" id="IcosahedroneZ20" class="tbox" value="4" />
 						<br/>
 
-					<button class=" " onclick="IcosaFaceInput()">SubmitFaces</button>
-				</div> 
-				  
-				</div>
 
+					<button class=" " onclick="IcosaFaceInput()">SubmitFaces</button>
+				</div>
+				</div> 
+
+				<button class="cordlink" onclick="openCord(event, 'Scaledci')"  >ScaledCoordinates</button>
+						<div id="Scaledci" class="cordcontent">
+							<span onclick="openCord(event, 'Scaledci')" class="topright">&times</span>
+
+
+						<b> <h4>Scaled coordinates :</h4>
+				(<span id="coordIcosax1">    0</span> , <span id="coordIcosay1">-0.53</span> , <span id="coordIcosaz1">0.85</span>)   <br>
+				(<span id="coordIcosax2"> 0.85</span> , <span id="coordIcosay2">    0</span> , <span id="coordIcosaz2"> 0.53</span>)    <br>
+				(<span id="coordIcosax3"> 0.85</span> , <span id="coordIcosay3">    0</span> , <span id="coordIcosaz3">-0.53</span>)   <br>
+				(<span id="coordIcosax4">-0.85</span> , <span id="coordIcosay4">    0</span> , <span id="coordIcosaz4">-0.53</span>)  <br>
+				(<span id="coordIcosax5">-0.85</span> , <span id="coordIcosay5">    0</span> , <span id="coordIcosaz5"> 0.53</span>)   <br>
+				(<span id="coordIcosax6">-0.53</span> , <span id="coordIcosay6"> 0.85</span> , <span id="coordIcosaz6">    0</span>)   <br>
+				(<span id="coordIcosax7"> 0.53</span> , <span id="coordIcosay7"> 0.85</span> , <span id="coordIcosaz7">    0</span>)  <br>
+				(<span id="coordIcosax8"> 0.53</span> , <span id="coordIcosay8">-0.85</span> , <span id="coordIcosaz8">    0</span>)   <br>
+				(<span id="coordIcosax9">-0.53</span> , <span id="coordIcosay9">-0.85</span> , <span id="coordIcosaz9">    0</span>)  <br>
+				(<span id="coordIcosax10">    0</span> , <span id="coordIcosay10">-0.53</span> , <span id="coordIcosaz10">-0.85</span>)<br>
+				(<span id="coordIcosax11">    0</span> , <span id="coordIcosay11"> 0.53</span> , <span id="coordIcosaz11">-0.85</span>)<br>
+				(<span id="coordIcosax12">    0</span> , <span id="coordIcosay12"> 0.53</span> , <span id="coordIcosaz12"> 0.85</span>)<br>
+						</b><br>
+			</div>
+			</div>
+	</div>
 </div>
+
+
 
 <div id="Display" class="tabcontent">
 
@@ -798,17 +945,21 @@
 				
 				<br><br>Scale by individual directions -><br> X:
 				<input type="Number" id="ScaleIX" class="tbox" value="1" />
-				<td><button class=" " onclick="IXScale()">Submit</button></td><br>Y:
+				<td><button class=" " onclick="IXScale()">Submit</button><span id="Xlimit" style="color:  red;"></span></td><br>Y:
 				<input type="Number" id="ScaleIY" class="tbox" value="1" />
-				<td><button class=" " onclick="IYScale()">Submit</button></td><br>Z:
+				<td><button class=" " onclick=" IYScale()">Submit</button><span id="Ylimit" style="color:  red;"></span> </td><br>Z:
 				<input type="Number" id="ScaleIZ" class="tbox" value="1" />
-				<td><button class=" " onclick="IZScale()">Submit</button></td>
+				<td><button class=" " onclick="IZScale()">Submit</button><span id="Zlimit" style="color:  red;"></span></td>
 				<!--br><br>The Limit for Scaling Factors is -> X:
 				<input type="Number" id="ScaleX" class="tbox" value="5" disabled="true" />Y:
 				<input type="Number" id="ScaleY" class="tbox" value="5" disabled="true"/>Z:
 				<input type="Number" id="ScaleZ" class="tbox" value="5" disabled="true" /-->
 				
 </div>
+<script >document.getElementById("defaultOpen").click();document.getElementById("defaultx").click();
+
+</script>
+
 
 </body>
 </html>
