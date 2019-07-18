@@ -1,7 +1,7 @@
 var scene = new THREE.Scene();
 
-var heightScreen =500;
-var widthScreen = 500;
+var heightScreen =510;
+var widthScreen = 510;
 var camera = new THREE.PerspectiveCamera( 60, widthScreen/heightScreen, 0.001, 100000 );
 
 var camera2 = new THREE.OrthographicCamera(	widthScreen / -900, 
@@ -12,7 +12,7 @@ var camera2 = new THREE.OrthographicCamera(	widthScreen / -900,
 											100000 );
 
 var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true});
-renderer.setSize( 500,500);
+renderer.setSize( 510,510);
 
 var canvas = document.getElementById("mainCanvas");
 var ctx = canvas.getContext("2d");

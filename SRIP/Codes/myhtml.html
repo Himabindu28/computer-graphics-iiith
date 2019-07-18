@@ -7,16 +7,27 @@
 <title>Transformatiom : Scaling</title>
 
 <link rel="stylesheet" href="mycss.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
 
-<body>
-	<div id="content">
+<body style="background-color: #D3D3D3;">
+
 	<h3 class="styletitle" style="text-align: center;"> Experiment 4 : Transformation - Scaling </h3>
 <!--canvas id="renderCanvas" style="width: 7px;height: 7px;"></canvas-->
 		<script src="../Libraries/three.js"></script>
 		<script src="../Libraries/three.min.js"></script>
 		<script src="../Libraries/OrbitControls.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+			
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+			
+		</script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+			
+		</script>
 
 
 
@@ -31,7 +42,9 @@
 </div>
 
 
-<div class="tab">
+
+
+<div class="tab" style="width:168px;">
 
  
   <button class="tablinks" onclick="openTab(event, 'World')" id="defaultOpen">World</button>
@@ -48,13 +61,14 @@
 		             </iframe><br>
 		               World
 		              <br>
+		              <br>
 				
 		             <!--h4 >Click below to change the vertices and faces of the following figures
 		              <br> 
 		             ("Draw" checbox should be checked to observe the changes)</h4-->
 				<div class="wrld">
 
-
+					<font size="4.5">
 				  <button class="wrldlinks" onclick="openFig(event, 'trianglee')" id="defaultx">Instance1</button>
 
 				  <button class="wrldlinks" onclick="openFig(event, 'cubee')">cube</button>
@@ -62,51 +76,85 @@
 				  <button class="wrldlinks" onclick="openFig(event, 'dodecahedronn')">Dodecahedron</button>
 
 				  <button class="wrldlinks" onclick="openFig(event, 'icosahedronn')">Icosahedron</button>
-
+				  </font>
 				 
 				</div>
 
 				<div id="trianglee" class="wrldcontent" >
-					<div class="ex1">
-					<span onclick="openFig(event, 'trianglee')" class="topright">&times</span>
-					
+					    <div class="card" style="height: 20rem;overflow: auto;">      
+				<div class="accordion" id="accordionExample">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
 
-						<button class="cordlink" onclick="openCord(event, 'Cord')"  >Coordinate System</button><br>
-						<div id="Cord" class="cordcontent">
-							
-							<span onclick="openCord(event, 'Cord')" class="topright">&times</span>
-						X:
-					<input type="Number" id="TriX" class="tbox" value="0" />
-					<br>Y:
-					<input type="Number" id="TriY" class="tbox" value="0" />
-					<br>Z:
-					<input type="Number" id="TriZ" class="tbox" value="0" /><br>
-					<button class=" " onclick="TriTrans()">Submit</button>
-					<br>
-				
+					    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					      	  <br>X :
+					          <input type="Number" id="TriX" class="tbox" value="0" />
+					          <br>Y :
+					          <input type="Number" id="TriY" class="tbox" value="0" />
+					          <br>Z :
+					          <input type="Number" id="TriZ" class="tbox" value="0" /><br>
+					          <button class=" " onclick="TriTrans()">Submit</button>
+					      </div>
+					    </div>
+					  </div>
 				</div>
-			
 
 
-						<button class="cordlink" onclick="openCord(event, 'Trans1')"  >Transformation 1</button><br>
-						<div id="Trans1" class="cordcontent">
-							<span onclick="openCord(event, 'Trans1')" class="topright">&times</span>
-						
+				<div class="accordion" id="accordionExample2">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsex" aria-expanded="true" aria-controls="collapsex" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
 
+					    <div id="collapsex" class="collapse show" aria-labelledby="headingx" data-parent="#accordionExample2">
+					      <div class="card-body">
+					       
 					<input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw<br>
 					<input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active<br>
+					      </div>
+					    </div>
+					  </div>
 				</div>
+			
+			<div class="accordion" id="accordionExample3">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsey" aria-expanded="true" aria-controls="collapsey" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
 
-						<button class="cordlink" onclick="openCord(event, 'Shape1')"  >-> Shape 1</button><br>
-						<div id="Shape1" class="cordcontent">
-							<span onclick="openCord(event, 'Shape1')" class="topright">&times</span>
+					    <div id="collapsey" class="collapse" aria-labelledby="headingy" data-parent="#accordionExample3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExample4">
+					  <div class="card">
+					    <div class="card-header" id="headingz">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsez" aria-expanded="true" aria-controls="collapsez" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
 
-
-						<button class="cordlink" onclick="openCord(event, 'verticec')"  >---> Vertices</button><br>
-						<div id="verticec" class="cordcontent">
-							<span onclick="openCord(event, 'verticec')" class="topright">&times</span>
-
-							Click to change the original coordinates<br/>
+					    <div id="collapsez" class="collapse" aria-labelledby="headingz" data-parent="#accordionExample4">
+					      <div class="card-body">
+					       
+					      	   	Click to change the original coordinates<br/>
 					    <input type="Number" id="TriangleiX1" class="tbox" value="4" />
 						<input type="Number" id="TriangleiY1" class="tbox" value="3" />
 						<input type="Number" id="TriangleiZ1" class="tbox" value="0" />
@@ -121,46 +169,91 @@
 						<input type="Number" id="TriangleiY3" class="tbox" value="1" />
 						<input type="Number" id="TriangleiZ3" class="tbox" value="0" />
 						<br/>
-					
-					<button class=" " onclick="TriInput()">SubmitVertices</button>
+					       <button class=" " onclick="TriInput()">SubmitVertices</button>
 					<br/>
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
-
-
-				<button class="cordlink" onclick="openCord(event, 'facec')"  > ---> Face</button><br>
-						<div id="facec" class="cordcontent">
-							<span onclick="openCord(event, 'facec')" class="topright">&times</span>
 				
-					< Triangles (faces) ><br/>
+				<div class="accordion" id="accordionExample5">
+					  <div class="card">
+					    <div class="card-header" id="headingxy">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsexy" aria-expanded="true" aria-controls="collapsexy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsexy" class="collapse" aria-labelledby="headingxy" data-parent="#accordionExample5">
+					      <div class="card-body">
+					          < Triangles (faces) ><br/>
 						<input type="Number" id="TriangleeX" class="tbox" value="0" />
 						<input type="Number" id="TriangleeY" class="tbox" value="1" />
 						<input type="Number" id="TriangleeZ" class="tbox" value="2" />
 						<br/>
 					
 					<button class=" " onclick="TriFaceInput()">SubmitFaces</button>
-				</div>
-</div>
+					
 
-						<button class="cordlink" onclick="openCord(event, 'Scaledc')"  >ScaledCoordinates</button><br>
-						<div id="Scaledc" class="cordcontent">
-							<span onclick="openCord(event, 'Scaledc')" class="topright">&times</span>
-						
+					       
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
+
+				<div class="accordion" id="accordionExample6">
+					  <div class="card">
+					    <div class="card-header" id="headingsc">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsesc" aria-expanded="true" aria-controls="collapsesc" style="width:200px;">
+					          Scaled Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsesc" class="collapse" aria-labelledby="headingsc" data-parent="#accordionExample6">
+					      <div class="card-body">
+					       			
 			(<span id="coordTrix1">4</span> , <span id="coordTriy1">3</span> , <span id="coordTriz1">0</span>)<br>
 			(<span id="coordTrix2">0</span> , <span id="coordTriy2">4</span> , <span id="coordTriz2">0</span>)<br>
 			(<span id="coordTrix3">2</span> , <span id="coordTriy3">1</span> , <span id="coordTriz3">0</span>)<br>
 <br>
-	</div>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+		
 </div>
 </div>
 
 
 				<div id="cubee" class="wrldcontent" >
-					<div class="ex1" >
-						<button class="cordlink" onclick="openCord(event, 'Cordc')"  >Coordinate System</button><br>
-						<div id="Cordc" class="cordcontent">
-							
-							<span onclick="openCord(event, 'Cordc')" class="topright">&times</span>
-						X:
+		<div class="card" style="height: 20rem;overflow: auto;">      
+
+					<div class="accordion" id="accordionExamplec">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecOne" aria-expanded="true" aria-controls="collapsecOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecOne" class="collapse" aria-labelledby="headingcOne" data-parent="#accordionExamplec">
+					      <div class="card-body">
+					       X:
 						<input type="Number" id="CubeX" class="tbox" value="0" /><br>
 						Y:
 					<input type="Number" id="CubeY" class="tbox" value="0" /><br>
@@ -168,29 +261,61 @@
 					<input type="Number" id="CubeZ" class="tbox" value="0" /><br>
 					<button class=" " onclick="CubeTrans()">Submit</button><br>
 						
+					      </div>
+					    </div>
+					  </div>
 				</div>
 
-				<button class="cordlink" onclick="openCord(event, 'Trans1c')"  >Transformation 1</button><br>
-						<div id="Trans1c" class="cordcontent">
-							<span onclick="openCord(event, 'Trans1c')" class="topright">&times</span>
-						
-						<input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
+
+
+				<div class="accordion" id="accordionExamplec2">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecx" aria-expanded="true" aria-controls="collapsecx" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecx" class="collapse show" aria-labelledby="headingcx" data-parent="#accordionExamplec2">
+					      <div class="card-body">
+					       <input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
 						<input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active
 					
-					<br>
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
+			
+			<div class="accordion" id="accordionExamplec3">
+					  <div class="card">
+					    <div class="card-header" id="headingcOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecy" aria-expanded="true" aria-controls="collapsecy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
 
-					<button class="cordlink" onclick="openCord(event, 'Shape1c')"  >-> Shape 1</button>
-						<div id="Shape1c" class="cordcontent">
-							<span onclick="openCord(event, 'Shape1c')" class="topright">&times</span>
+					    <div id="collapsecy" class="collapse" aria-labelledby="headingcy" data-parent="#accordionExamplec3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExamplec4">
+					  <div class="card">
+					    <div class="card-header" id="headingcz">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecz" aria-expanded="true" aria-controls="collapsecz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
 
-
-						<button class="cordlink" onclick="openCord(event, 'verticecc')"  >---> Vertices</button><br>
-						<div id="verticecc" class="cordcontent">
-							<span onclick="openCord(event, 'verticecc')" class="topright">&times</span>
-
-						
-						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <div id="collapsecz" class="collapse" aria-labelledby="headingcz" data-parent="#accordionExamplec4">
+					      <div class="card-body">
+					       Click to change the original coordinates<br/>
 					    <input type="Number" id="CubeiX1" class="tbox" value="-1" />
 						<input type="Number" id="CubeiY1" class="tbox" value="-1" />
 						<input type="Number" id="CubeiZ1" class="tbox" value="1" />
@@ -235,15 +360,26 @@
 					<button class=" " onclick="CubeInput()">SubmitVertices</button>
 		
 
+					      
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
-
-					<br/><br/>
-
-					<button class="cordlink" onclick="openCord(event, 'facecc')"  > ---> Face</button><br>
-						<div id="facecc" class="cordcontent">
-							<span onclick="openCord(event, 'facecc')" class="topright">&times</span>
 				
-					< faces (triangles) ><br/>
+				<div class="accordion" id="accordionExamplec5">
+					  <div class="card">
+					    <div class="card-header" id="headingcxy">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecxy" aria-expanded="true" aria-controls="collapsecxy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecxy" class="collapse" aria-labelledby="headingcxy" data-parent="#accordionExamplec5">
+					      <div class="card-body">
+					      < faces (triangles) ><br/>
 						<input type="Number" id="CubeeX1" class="tbox" value="0" />
 						<input type="Number" id="CubeeY1" class="tbox" value="3" />
 						<input type="Number" id="CubeeZ1" class="tbox" value="2" />
@@ -307,14 +443,31 @@
 					
 					<button class=" " onclick="CubeFaceInput()">SubmitFaces</button>
 
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
-			</div><br>
 
-				<button class="cordlink" onclick="openCord(event, 'Scaledcc')"  >ScaledCoordinates</button>
-						<div id="Scaledcc" class="cordcontent">
-							<span onclick="openCord(event, 'Scaledcc')" class="topright">&times</span>
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
 
-							<b> <h4>Scaled coordinates :</h4>
+				<div class="accordion" id="accordionExamplec6">
+					  <div class="card">
+					    <div class="card-header" id="headingcsc">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsecsc" aria-expanded="true" aria-controls="collapsecsc" style="width:200px;">
+					          Scaled Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsecsc" class="collapse" aria-labelledby="headingcsc" data-parent="#accordionExample6">
+					      <div class="card-body">
+					       			
 			(<span id="coordCubex1">-1</span> , <span id="coordCubey1">-1</span> , <span id="coordCubez1">1</span>)<br>
 			(<span id="coordCubex2">1</span> , <span id="coordCubey2">-1</span> , <span id="coordCubez2">1</span>)<br>
 			(<span id="coordCubex3">-1</span> , <span id="coordCubey3">1</span> , <span id="coordCubez3">1</span>)<br>
@@ -323,24 +476,34 @@
 			(<span id="coordCubex6">1</span> , <span id="coordCubey6">-1</span> , <span id="coordCubez6">-1</span>)<br>
 			(<span id="coordCubex7">-1</span> , <span id="coordCubey7">1</span> , <span id="coordCubez7">-1</span>)<br>
 			(<span id="coordCubex8">1</span> , <span id="coordCubey8">1</span> , <span id="coordCubez8">-1</span>)<br>
-		</b><br>
-
-						</div>
-
-				
+							      </div>
+					    </div>
+					  </div>
 				</div>
+
+
+
+</div>
 </div>
 
 
-
 		<div id="dodecahedronn" class="wrldcontent">
-					<div class="ex1" >
-						<button class="cordlink" onclick="openCord(event, 'Cordd')"  >Coordinate System</button><br>
-						<div id="Cordd" class="cordcontent">
-							
-							<span onclick="openCord(event, 'Cordd')" class="topright">&times</span>
-						
-							X:
+			<div class="card" style="height: 20rem;overflow: auto;">      
+
+
+			<div class="accordion" id="accordionExampled">
+					  <div class="card">
+					    <div class="card-header" id="headingdOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedOne" aria-expanded="true" aria-controls="collapsedOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedOne" class="collapse" aria-labelledby="headingdOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					      			X:
 					<input type="Number" id="DodecX" class="tbox" value="0" /><br>
 								Y:
 					<input type="Number" id="DodecY" class="tbox" value="0" /><br>
@@ -350,28 +513,60 @@
 
 					<button class=" " onclick="DodecTrans()">Submit
 					</button>
+					      </div>
+					    </div>
+					  </div>
 				</div>
 
-				  <button class="cordlink" onclick="openCord(event, 'Trans1d')"  >Transformation 1</button><br>
-						<div id="Trans1d" class="cordcontent">
-							<span onclick="openCord(event, 'Trans1d')" class="topright">&times</span>
-					<input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>
-					Draw<br>
-					<input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>
-					Active
+
+				<div class="accordion" id="accordionExampled2">
+					  <div class="card">
+					    <div class="card-header" id="headingdOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedx" aria-expanded="true" aria-controls="collapsedx" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedx" class="collapse show" aria-labelledby="headingdx" data-parent="#accordionExampled2">
+					      <div class="card-body">
+					       <input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw<br>
+					<input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active
 					<br>
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
+			
+			<div class="accordion" id="accordionExampled3">
+					  <div class="card">
+					    <div class="card-header" id="headingOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedy" aria-expanded="true" aria-controls="collapsedy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
 
-				<button class="cordlink" onclick="openCord(event, 'Shape1d')"  >-> Shape 1</button>
-						<div id="Shape1d" class="cordcontent">
-							<span onclick="openCord(event, 'Shape1d')" class="topright">&times</span>
+					    <div id="collapsedy" class="collapse" aria-labelledby="headingdy" data-parent="#accordionExample3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExampled4">
+					  <div class="card">
+					    <div class="card-header" id="headingdz">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedz" aria-expanded="true" aria-controls="collapsedz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
 
-
-						<button class="cordlink" onclick="openCord(event, 'verticecd')"  >---> Vertices</button><br>
-						<div id="verticecd" class="cordcontent">
-							<span onclick="openCord(event, 'verticecd')" class="topright">&times</span>
-
-						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <div id="collapsedz" class="collapse" aria-labelledby="headingdz" data-parent="#accordionExampled4">
+					      <div class="card-body">
+					       Click to change the original coordinates<br/>
 					    <input type="Number" id="DodecahedroniX1" class="tbox" value="-0.58" />
 						<input type="Number" id="DodecahedroniY1" class="tbox" value="-0.58" />
 						<input type="Number" id="DodecahedroniZ1" class="tbox" value="0.58" />
@@ -472,12 +667,25 @@
 						<br/>
 					
 					<button class=" " onclick="DodecaInput()">SubmitVertices</button>
-					<br/></div>
-					<button class="cordlink" onclick="openCord(event, 'facecd')"  > ---> Face</button><br>
-						<div id="facecd" class="cordcontent">
-							<span onclick="openCord(event, 'facecd')" class="topright">&times</span>
+					<br/>
+					      </div>
+					    </div>
+					  </div>
+				</div>
 				
+				<div class="accordion" id="accordionExampled5">
+					  <div class="card">
+					    <div class="card-header" id="headingdxy">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedxy" aria-expanded="true" aria-controls="collapsedxy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
 
+					    <div id="collapsedxy" class="collapse" aria-labelledby="headingdxy" data-parent="#accordionExampled5">
+					      <div class="card-body">
+					          
 					< faces (triangles) ><br/>
 						<input type="Number" id="DodecahedroneX1" class="tbox" value="1" />
 						<input type="Number" id="DodecahedroneY1" class="tbox" value="2" />
@@ -655,18 +863,31 @@
 						<input type="Number" id="DodecahedroneZ36" class="tbox" value="18" />
 						<br/>
 
-						
-					
 					<button class=" " onclick="DodecFaceInput()">SubmitFaces</button>
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
-				</div>
-				<br>
-				<button class="cordlink" onclick="openCord(event, 'Scaledcd')"  >ScaledCoordinates</button>
-						<div id="Scaledcd" class="cordcontent">
-							<span onclick="openCord(event, 'Scaledcd')" class="topright">&times</span>
 
+					      </div>
+					    </div>
+					  </div>
+				</div>	
 
-						<b> <h4>Scaled coordinates :</h4>
+				<div class="accordion" id="accordionExampled6">
+					  <div class="card">
+					    <div class="card-header" id="headingdsc">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapsedsc" aria-expanded="true" aria-controls="collapsedsc" style="width:200px;">
+					          Scaled Coordinates
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapsedsc" class="collapse" aria-labelledby="headingdsc" data-parent="#accordionExampled6">
+					      <div class="card-body">
+					      	
 						( <span id="coordDodecx1">-0.58</span> , <span id="coordDodecy1">-0.58</span> , <span id="coordDodecz1">0.58</span>)<br>
 						( <span id="coordDodecx2"> 0.93</span> , <span id="coordDodecy2"> 0.36</span> , <span id="coordDodecz2">   0</span>)<br>
 						( <span id="coordDodecx3"> 0.93</span> , <span id="coordDodecy3">-0.36</span> , <span id="coordDodecz3">   0</span>)<br>
@@ -687,51 +908,96 @@
 						( <span id="coordDodecx18"> 0.58</span> , <span id="coordDodecy18">-0.58</span> , <span id="coordDodecz18">-0.58</span>)<br>
 						( <span id="coordDodecx19"> 0.58</span> , <span id="coordDodecy19">-0.58</span> , <span id="coordDodecz19"> 0.58</span>)<br>
 						( <span id="coordDodecx20">-0.58</span> , <span id="coordDodecy20">-0.58</span> , <span id="coordDodecz20">-0.58</span>)<br>
-						</b><br>
-
-						</div>
+					   
+					      </div>
+					    </div>
+					  </div>
 				</div>
+
+
 			</div>
-
-
-
+</div>
 
 
 				<div id="icosahedronn" class="wrldcontent">
-				 
+				<div class="card" style="height: 20rem;overflow: auto;">       
 
-				 <div class="ex1" >
-				 	<button class="cordlink" onclick="openCord(event, 'Cordi')"  >Coordinate System</button><br>
-						<div id="Cordi" class="cordcontent">
-							
-							<span onclick="openCord(event, 'Cordi')" class="topright">&times</span>
-						X:
-				 	<input type="Number" id="IcoX" class="tbox" value="0" /><br>
-				 	Y:
-					<input type="Number" id="IcoY" class="tbox" value="0" /><br>
-					Z:
-					<input type="Number" id="IcoZ" class="tbox" value="0" /><br>
 
-					<button class=" " onclick="IcosaTrans()">Submit</button>
-				 	<br>
-				 </div>
-				 <button class="cordlink" onclick="openCord(event, 'Trans1i')"  >Transformation 1</button><br>
-						<div id="Trans1i" class="cordcontent">
-							<span onclick="openCord(event, 'Trans1i')" class="topright">&times</span>
+				 <div class="accordion" id="accordionExamplei">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseiOne" aria-expanded="true" aria-controls="collapseiOne" style="width:200px;">
+					          Coordinate System
+					        </button>
+					      </h5>
+					    </div>
 
+					    <div id="collapseiOne" class="collapse" aria-labelledby="headingiOne" data-parent="#accordionExample">
+					      <div class="card-body">
+					       	X:
+					 	<input type="Number" id="IcoX" class="tbox" value="0" /><br>
+					 	Y:
+						<input type="Number" id="IcoY" class="tbox" value="0" /><br>
+						Z:
+						<input type="Number" id="IcoZ" class="tbox" value="0" /><br>
+
+						<button class=" " onclick="IcosaTrans()">Submit</button>
+					 	<br>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+
+				<div class="accordion" id="accordionExamplei2">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseix" aria-expanded="true" aria-controls="collapseix" style="width:200px;">
+					          Transformation 1
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseix" class="collapse show" aria-labelledby="headingix" data-parent="#accordionExamplei2">
+					      <div class="card-body">
+					 
 				 			<input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw<br>
 					<input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active<br>
-					</div>
-					<button class="cordlink" onclick="openCord(event, 'Shape1i')"  >Shape 1</button><br>
-					<div id="Shape1i" class="cordcontent">
-							<span onclick="openCord(event, 'Shape1i')" class="topright">&times</span>
+					      </div>
+					    </div>
+					  </div>
+				</div>
+			
+			<div class="accordion" id="accordionExamplei3">
+					  <div class="card">
+					    <div class="card-header" id="headingiOne">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseiy" aria-expanded="true" aria-controls="collapseiy" style="width:200px;">
+					          Shape 1
+					        </button>
+					      </h5>
+					    </div>
 
+					    <div id="collapseiy" class="collapse" aria-labelledby="headingiy" data-parent="#accordionExamplei3">
+					      <div class="card-body">
+					       
+					      
+					      	<div class="accordion" id="accordionExamplei4">
+					  <div class="card">
+					    <div class="card-header" id="headingiz">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseiz" aria-expanded="true" aria-controls="collapseiz" style="width:200px;">
+					          Vertices
+					        </button>
+					      </h5>
+					    </div>
 
-						<button class="cordlink" onclick="openCord(event, 'verticeci')"  >---> Vertices</button><br>
-						<div id="verticeci" class="cordcontent">
-							<span onclick="openCord(event, 'verticeci')" class="topright">&times</span>
-
-						<h4>< Coordinates ></h4> Click to change the original coordinates<br/>
+					    <div id="collapseiz" class="collapse" aria-labelledby="headingiz" data-parent="#accordionExamplei4">
+					      <div class="card-body">
+					       
+					      Click to change the original coordinates<br/>
 					    <input type="Number" id="IcosahedroniX1" class="tbox" value="0" />
 						<input type="Number" id="IcosahedroniY1" class="tbox" value="-0.53" />
 						<input type="Number" id="IcosahedroniZ1" class="tbox" value="0.85" />
@@ -794,11 +1060,25 @@
 
 					
 					<button class=" " onclick="IcosaInput()">SubmitVertices</button>
-					<br/></div><br/>
-					<button class="cordlink" onclick="openCord(event, 'faceci')"  > ---> Face</button><br>
-						<div id="faceci" class="cordcontent">
-							<span onclick="openCord(event, 'faceci')" class="topright">&times</span>
+					<br/>
+					      </div>
+					    </div>
+					  </div>
+				</div>
 				
+				<div class="accordion" id="accordionExamplei5">
+					  <div class="card">
+					    <div class="card-header" id="headingixy">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseixy" aria-expanded="true" aria-controls="collapseixy" style="width:200px;">
+					          Faces
+					        </button>
+					      </h5>
+					    </div>
+
+					    <div id="collapseixy" class="collapse" aria-labelledby="headingixy" data-parent="#accordionExamplei5">
+					      <div class="card-body">
+					     
 					< faces (triangles) ><br/>
 						<input type="Number" id="IcosahedroneX1" class="tbox" value="6" />
 						<input type="Number" id="IcosahedroneY1" class="tbox" value="2" />
@@ -900,15 +1180,33 @@
 
 
 					<button class=" " onclick="IcosaFaceInput()">SubmitFaces</button>
+
+					       
+					
+					      </div>
+					    </div>
+					  </div>
 				</div>
-				</div> 
 
-				<button class="cordlink" onclick="openCord(event, 'Scaledci')"  >ScaledCoordinates</button>
-						<div id="Scaledci" class="cordcontent">
-							<span onclick="openCord(event, 'Scaledci')" class="topright">&times</span>
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>	
 
+				<div class="accordion" id="accordionExamplei6">
+					  <div class="card">
+					    <div class="card-header" id="headingisc">
+					      <h5 class="mb-0">
+					        <button type="button" data-toggle="collapse" data-target="#collapseisc" aria-expanded="true" aria-controls="collapseisc" style="width:200px;">
+					          Scaled Coordinates
+					        </button>
+					      </h5>
+					    </div>
 
-						<b> <h4>Scaled coordinates :</h4>
+					    <div id="collapseisc" class="collapse" aria-labelledby="headingisc" data-parent="#accordionExamplei6">
+					      <div class="card-body">
+					       			<b> 
 				(<span id="coordIcosax1">    0</span> , <span id="coordIcosay1">-0.53</span> , <span id="coordIcosaz1">0.85</span>)   <br>
 				(<span id="coordIcosax2"> 0.85</span> , <span id="coordIcosay2">    0</span> , <span id="coordIcosaz2"> 0.53</span>)    <br>
 				(<span id="coordIcosax3"> 0.85</span> , <span id="coordIcosay3">    0</span> , <span id="coordIcosaz3">-0.53</span>)   <br>
@@ -922,10 +1220,16 @@
 				(<span id="coordIcosax11">    0</span> , <span id="coordIcosay11"> 0.53</span> , <span id="coordIcosaz11">-0.85</span>)<br>
 				(<span id="coordIcosax12">    0</span> , <span id="coordIcosay12"> 0.53</span> , <span id="coordIcosaz12"> 0.85</span>)<br>
 						</b><br>
+			
+					      </div>
+					    </div>
+					  </div>
+				</div>
 			</div>
-			</div>
-	</div>
-</div>
+		</div>
+		</div>
+	
+
 
 
 
@@ -959,7 +1263,6 @@
 <script >document.getElementById("defaultOpen").click();document.getElementById("defaultx").click();
 
 </script>
-
 
 </body>
 </html>
