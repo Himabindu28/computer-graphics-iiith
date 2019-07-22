@@ -1754,9 +1754,7 @@ function addScale() {
     //XScale = Number(document.getElementById('ScaleX').value);
 	//YScale = Number(document.getElementById('ScaleY').value);
 	//ZScale = Number(document.getElementById('ScaleZ').value);
-		XScale =5;
-	YScale =5;
-	ZScale =5;
+	
     if (isNaN(sx) || isNaN(sy)) {
         //setErrorMessage("Scale inputs must be numbers!");
         return;
@@ -1767,6 +1765,12 @@ function addScale() {
     }
     if(condition)
 			{		CubeCoord();
+				XScale = Number(document.getElementById('ScalecX').value);
+				YScale = Number(document.getElementById('ScalecY').value);
+				ZScale = Number(document.getElementById('ScalecZ').value);
+				frame = Number(document.getElementById('fscc').value);
+				stepvalue=frame/1000000;
+				document.getElementById("myslider").step=stepvalue;
 				if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
 					cube.scale.set(sx,sy,sx);
 				}
@@ -1798,7 +1802,14 @@ function addScale() {
 
 			}
 		if(condition1)
-			{if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+			{
+				XScale = Number(document.getElementById('ScalehX').value);
+				YScale = Number(document.getElementById('ScalehY').value);
+				ZScale = Number(document.getElementById('ScalehZ').value);
+				frame = Number(document.getElementById('fsch').value);
+				stepvalue=frame/1000000;
+				document.getElementById("myslider").step=stepvalue;
+				if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
 					icosahedron.scale.set(sx,sy,sx);
 				}
 				else if(sy<=YScale && sx>XScale && sx>ZScale){
@@ -1827,7 +1838,14 @@ function addScale() {
 				IcosaCoord();
 			}
 			if(condition3)
-		{	if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
+		{	
+			XScale = Number(document.getElementById('ScaletX').value);
+			YScale = Number(document.getElementById('ScaletY').value);
+			ZScale = Number(document.getElementById('ScaletZ').value);
+			frame = Number(document.getElementById('fsct').value);
+			stepvalue=frame/1000000;
+			document.getElementById("myslider").step=stepvalue;
+			if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
 					triangle.scale.set(sx,sy,sx);
 				}
 				else if(sy<=YScale && sx>XScale && sx>ZScale){
@@ -1856,7 +1874,12 @@ function addScale() {
 			TriCoord();
 		}
 		if(condition2)
-			{	
+			{	XScale = Number(document.getElementById('ScaledX').value);
+				YScale = Number(document.getElementById('ScaledY').value);
+				ZScale = Number(document.getElementById('ScaledZ').value);
+				frame = Number(document.getElementById('fscd').value);
+				stepvalue=frame/1000000;
+				document.getElementById("myslider").step=stepvalue;
 				if(sx<=XScale&&sy<=YScale&&sx<=ZScale){
 					dodecahedron.scale.set(sx,sy,sx);
 				}

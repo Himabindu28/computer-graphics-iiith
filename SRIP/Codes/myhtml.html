@@ -35,7 +35,7 @@
 <canvas id="mainCanvas"></canvas>
 <script type="text/javascript" src="myjs.js"></script>
 <br>
-<input type="range" class="slider" min="1" max="5" value="1" step="0.01" onchange="sliderChange(this.value)"  onclick="addScale()"/> 
+<input type="range" id="myslider" class="slider" min="1" max="5" value="1" step="0.01" onchange="sliderChange(this.value)"  onclick="addScale()"/> 
 			
 
 <span class="smallsize"> Scaling factor : </span><span id="sliderStatus">1</span> 
@@ -117,15 +117,31 @@
 					      </h5>
 					    </div>
 
-					    <div id="collapsex" class="collapse show" aria-labelledby="headingx" data-parent="#accordionExample2">
+					    <div id="collapsex" class="collapse" aria-labelledby="headingx" data-parent="#accordionExample2">
 					      <div class="card-body">
-					       
-					<input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw<br>
-					<input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active<br>
+					      	 Scales by < 
+				<input type="Number" id="ScaletX" class="tbox" value="3"  />
+				<input type="Number" id="ScaletY" class="tbox" value="2" />
+				<input type="Number" id="ScaletZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fsct" class="tbox" value="1000" /> frames <br>
+			
 					      </div>
 					    </div>
 					  </div>
 				</div>
+
+				<div class="accordion" id="accordionExampleT">
+					  <div class="card">
+
+					      <div class="card-body">
+					       <input type="checkbox" id="TriangleDraw" onclick="DrawTriangle()" checked="true"/>Draw<br>
+					<input type="checkbox" id="TriangleActive" onclick="ActiveTriangle()"/>Active<br>
+					
+					      </div>
+
+					  </div>
+				</div>
+				
 			
 			<div class="accordion" id="accordionExample3">
 					  <div class="card">
@@ -278,14 +294,28 @@
 					      </h5>
 					    </div>
 
-					    <div id="collapsecx" class="collapse show" aria-labelledby="headingcx" data-parent="#accordionExamplec2">
+					    <div id="collapsecx" class="collapse" aria-labelledby="headingcx" data-parent="#accordionExamplec2">
+					      <div class="card-body">
+					            	 Scales by < 
+				<input type="Number" id="ScalecX" class="tbox" value="3"  />
+				<input type="Number" id="ScalecY" class="tbox" value="2" />
+				<input type="Number" id="ScalecZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fscc" class="tbox" value="1000" /> frames <br>
+			
+					
+					      </div>
+					    </div>
+					  </div>
+				</div>
+				<div class="accordion" id="accordionExampleC">
+					  <div class="card">
+
 					      <div class="card-body">
 					       <input type="checkbox" id="CubeDraw" onclick="DrawCube()"/>Draw<br>
 						<input type="checkbox" id="CubeActive" onclick="ActiveCube()"/>Active
 					
-					
 					      </div>
-					    </div>
+
 					  </div>
 				</div>
 			
@@ -529,14 +559,29 @@
 					      </h5>
 					    </div>
 
-					    <div id="collapsedx" class="collapse show" aria-labelledby="headingdx" data-parent="#accordionExampled2">
+					    <div id="collapsedx" class="collapse" aria-labelledby="headingdx" data-parent="#accordionExampled2">
 					      <div class="card-body">
+					            	 Scales by < 
+				<input type="Number" id="ScaledX" class="tbox" value="3"  />
+				<input type="Number" id="ScaledY" class="tbox" value="2" />
+				<input type="Number" id="ScaledZ" class="tbox" value="1"  /> in 
+				 <input type="Number"  id="fscd" class="tbox" value="1000" /> frames <br>
+			
+					      </div>
+					    </div>
+					  </div>
+				</div>
+
+				<div class="accordion" id="accordionExampleD">
+					  <div class="card">
+
+					      <div class="card-body">
+					    
 					       <input type="checkbox" id="DodecahedronDraw" onclick="DrawDodecahedron()"/>Draw<br>
 					<input type="checkbox" id="DodecahedronActive" onclick="ActiveDodecahedron()"/>Active
 					<br>
-					
 					      </div>
-					    </div>
+
 					  </div>
 				</div>
 			
@@ -960,13 +1005,28 @@
 					      </h5>
 					    </div>
 
-					    <div id="collapseix" class="collapse show" aria-labelledby="headingix" data-parent="#accordionExamplei2">
+					    <div id="collapseix" class="collapse" aria-labelledby="headingix" data-parent="#accordionExamplei2">
 					      <div class="card-body">
-					 
-				 			<input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw<br>
-					<input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active<br>
-					      </div>
+					       	 Scales by < 
+				<input type="Number" id="ScalehX" class="tbox" value="3" />
+				<input type="Number" id="ScalehY" class="tbox" value="2"/>
+				<input type="Number" id="ScalehZ" class="tbox" value="1" /> in 
+				 <input type="Number"  id="fsch" class="tbox" value="1000" /> frames <br>
+			
+				 	  </div>
 					    </div>
+					  </div>
+				</div>
+
+				<div class="accordion" id="accordionExampleIx">
+					  <div class="card">
+
+					      <div class="card-body">
+					    <input type="checkbox" id="IcosahedronDraw" onclick="DrawIcosahedron()"/>Draw<br>
+					<input type="checkbox" id="IcosahedronActive" onclick="ActiveIcosahedron()"/>Active<br>
+					  
+					      </div>
+
 					  </div>
 				</div>
 			
@@ -1254,10 +1314,7 @@
 				<td><button class=" " onclick=" IYScale()">Submit</button><span id="Ylimit" style="color:  red;"></span> </td><br>Z:
 				<input type="Number" id="ScaleIZ" class="tbox" value="1" />
 				<td><button class=" " onclick="IZScale()">Submit</button><span id="Zlimit" style="color:  red;"></span></td>
-				<!--br><br>The Limit for Scaling Factors is -> X:
-				<input type="Number" id="ScaleX" class="tbox" value="5" disabled="true" />Y:
-				<input type="Number" id="ScaleY" class="tbox" value="5" disabled="true"/>Z:
-				<input type="Number" id="ScaleZ" class="tbox" value="5" disabled="true" /-->
+				
 				
 </div>
 <script >document.getElementById("defaultOpen").click();document.getElementById("defaultx").click();
