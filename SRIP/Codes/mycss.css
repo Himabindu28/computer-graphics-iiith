@@ -158,9 +158,7 @@ td, tr{
     user-select: text;
 }
 
-#help-content p {
-    text-indent: 25px;
-}
+
 
 #help-icon {
     position: absolute;

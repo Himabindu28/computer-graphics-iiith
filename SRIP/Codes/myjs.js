@@ -8,8 +8,7 @@ var camera2 = new THREE.OrthographicCamera(	widthScreen / -900,
 											widthScreen / 900, 
 											heightScreen / 900, 
 											heightScreen / -900,
-											0.001,
-											100000 );
+											0.001,100000 );
 
 var renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true});
 renderer.setSize( 510,510);
